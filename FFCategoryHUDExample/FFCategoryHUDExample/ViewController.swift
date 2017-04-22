@@ -16,17 +16,19 @@ class ViewController: UIViewController {
         automaticallyAdjustsScrollViewInsets = false
         
         let categoryHUDFrame = CGRect(x: 0, y: 64, width: 375, height: 603)
-        let titles = ["哈哈哈1","哈哈哈2","哈哈哈3","哈哈哈4","哈哈哈5","哈哈哈6","哈哈哈7"]
+        let titles = ["哈哈df","哈哈哈sdfas","哈哈哈333","哈","134124哈哈哈","说就撒了开发商"]
         var style = FFCategoryTitleStyle()
+        style.isShowBottomLine = true
+        style.isNeedScale = true
+        style.bottomLineColor = UIColor.green
+      
         var childVCs = [UIViewController]()
         for _ in 0..<titles.count {
             let vc = UIViewController()
-            addChildViewController(vc)
             vc.view.backgroundColor = UIColor.random
             childVCs.append(vc)
         }
         let categoryHUD = FFCategoryHUD.init(frame: categoryHUDFrame, titles: titles, childVCs: childVCs, parentVC: self, style: style)
-        categoryHUD.backgroundColor = UIColor.random
         view.addSubview(categoryHUD)
         
         
