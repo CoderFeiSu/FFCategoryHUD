@@ -10,7 +10,7 @@ import UIKit
 
 extension UIColor {
 
-    class var random: UIColor {
+    static var random: UIColor {
         let redRandom = CGFloat(arc4random_uniform(UInt32(256))) / 255.0
         let greenRandom = CGFloat(arc4random_uniform(UInt32(256))) / 255.0
         let blueRandom = CGFloat(arc4random_uniform(UInt32(256))) / 255.0

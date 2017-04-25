@@ -1,0 +1,174 @@
+//
+//  FFCategoryKeyboardView.swift
+//  FFCategoryHUDExample
+//
+//  Created by 苏飞 on 2017/4/25.
+//  Copyright © 2017年 苏飞. All rights reserved.
+//
+
+import UIKit
+
+protocol FFCategoryKeyboardViewDelegate: class {
+    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, sourceIndex: Int, targetIndex: Int, progress: CGFloat)
+    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, didEndScrollAt index: Int)
+}
+
+protocol FFCategoryKeyboardViewDataSource : class {
+    func numberOfSections(in categoryKeyboardView: FFCategoryKeyboardView) -> Int
+    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, numberOfItemsInSection section: Int) -> Int
+    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, collectionView: UICollectionView,cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+}
+
+class FFCategoryKeyboardView: UIView {
+
+    weak var delegate: FFCategoryKeyboardViewDelegate?
+    weak var dataSource: FFCategoryKeyboardViewDataSource?
+    
+    fileprivate var  style: FFCategoryStyle
+    fileprivate var  layout: FFCategoryKeyboardLayout
+    fileprivate lazy var lastSection: Int = 0
+    fileprivate lazy var isAutoScoll: Bool = false
+    fileprivate lazy var collectionView: UICollectionView = {
+        let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.layout)
+        let cvX: CGFloat = 0
+        let cvY: CGFloat = 0
+        let cvW: CGFloat = self.bounds.width
+        let cvH: CGFloat = self.bounds.height - self.style.keyboard.pageControlHeight
+        cv.frame = CGRect(x: cvX, y: cvY, width: cvW, height: cvH)
+        cv.isPagingEnabled = true
+        cv.showsHorizontalScrollIndicator = false
+        cv.bounces = false
+        cv.delegate = self
+        cv.dataSource = self
+        cv.backgroundColor = self.style.contentBackgroundColor
+        return cv
+    }()
+    fileprivate lazy var pageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.currentPage = 0
+        pc.pageIndicatorTintColor = UIColor.lightGray
+        pc.currentPageIndicatorTintColor = UIColor.gray
+        pc.backgroundColor = self.style.contentBackgroundColor
+        let pcX: CGFloat = 0
+        let pcY: CGFloat = self.collectionView.frame.height
+        let pcW: CGFloat = self.bounds.width
+        let pcH: CGFloat = self.style.keyboard.pageControlHeight
+        pc.frame = CGRect(x: pcX, y: pcY, width: pcW, height: pcH)
+        return pc
+    }()
+    
+    
+    init(frame: CGRect, style: FFCategoryStyle, layout: FFCategoryKeyboardLayout) {
+        self.style = style
+        self.layout = layout
+        super.init(frame: frame)
+        addSubview(collectionView)
+        addSubview(pageControl)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+}
+
+
+extension FFCategoryKeyboardView {
+    open func register(_ cellClass: Swift.AnyClass?, forCellWithReuseIdentifier identifier: String) {
+        collectionView.register(cellClass, forCellWithReuseIdentifier: identifier)
+    }
+    
+    open func reloadData() {
+        collectionView.reloadData()
+    }
+    
+}
+
+
+extension FFCategoryKeyboardView: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return dataSource?.numberOfSections(in: self) ?? 0
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            let items = dataSource?.categoryKeyboardView(self, numberOfItemsInSection: section) ?? 0
+            if section == 0 {
+                pageControl.numberOfPages = ((items - 1) / (layout.rows * layout.cols) + 1)
+        }
+      return items
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+         let  cell = dataSource?.categoryKeyboardView(self, collectionView: collectionView, cellForItemAt: indexPath)
+         return cell!
+    }
+    
+
+    
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if (!decelerate) {
+            scrollViewDidEndDecelerating(scrollView)
+        }
+ }
+    
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        let offsetX = scrollView.contentOffset.x
+            let point = CGPoint(x: layout.sectionInset.left + 1 + offsetX, y: layout.sectionInset.top + 1)
+            guard let indexPath = collectionView.indexPathForItem(at: point) else {return}
+            handlerPageControl(indexPath: indexPath)
+    }
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+         print(#function, scrollView.contentOffset.x )
+        if isAutoScoll {
+           isAutoScoll = false
+           var offsetX = scrollView.contentOffset.x - 10
+           let sections = dataSource?.numberOfSections(in: self) ?? 0
+            if lastSection == sections - 1 {
+                guard let items  = dataSource?.categoryKeyboardView(self, numberOfItemsInSection: sections - 1 ) else {return}
+                let pages  = Int((items - 1) / (layout.rows * layout.cols)) + 1
+                if pages == 1 {
+                  offsetX = scrollView.contentOffset.x
+                }
+            }
+           let point = CGPoint(x: offsetX, y: 0)
+           scrollView.setContentOffset(point, animated: false)
+        }
+    }
+}
+
+
+
+extension FFCategoryKeyboardView: FFCategoryTitleViewDelegate {
+    
+    func categoryTitleView(_ categoryTitleView: FFCategoryTitleView, didClickedLblAt index: Int) {
+        
+         isAutoScoll = true
+        // 滚动内容部分
+        let indexPath = IndexPath(item: 0, section: index)
+        handlerPageControl(indexPath: indexPath)
+        collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
+    }
+}
+
+
+extension FFCategoryKeyboardView {
+
+    fileprivate func handlerPageControl(indexPath: IndexPath) {
+        let items = collectionView.numberOfItems(inSection: indexPath.section)
+        if (lastSection != indexPath.section) {
+            pageControl.numberOfPages = ((items - 1) / (layout.rows * layout.cols) + 1)
+            lastSection = indexPath.section
+            self.delegate?.categoryKeyboardView(self, didEndScrollAt: indexPath.section)
+        }
+        pageControl.currentPage = indexPath.item  / (layout.rows * layout.cols)
+    }
+}
+

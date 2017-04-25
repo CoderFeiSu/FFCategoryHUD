@@ -17,7 +17,7 @@ class FFCategoryTitleView: UIView {
     
     weak var delegate: FFCategoryTitleViewDelegate?
     
-    fileprivate var style: FFCategoryTitleStyle
+    fileprivate var style: FFCategoryStyle
     fileprivate var titles: [String]
     fileprivate var titleLbls: [UILabel] = [UILabel]()
     /** 选中的Lbl */
@@ -29,10 +29,10 @@ class FFCategoryTitleView: UIView {
     }()
     // 颜色渐变
     fileprivate lazy var sourceRGB: (CGFloat, CGFloat, CGFloat) = {
-      return self.style.selectTitleColor.rgbValue
+      return self.style.title.selectColor.rgbValue
     }()
     fileprivate lazy var targetRGB: (CGFloat, CGFloat, CGFloat) = {
-      return self.style.normalTitleColor.rgbValue
+      return self.style.title.normalColor.rgbValue
     }()
     fileprivate lazy var deltaRGB: (CGFloat, CGFloat, CGFloat) = {
         let deltaR = self.sourceRGB.0 - self.targetRGB.0
@@ -51,15 +51,15 @@ class FFCategoryTitleView: UIView {
         let firstLbl = self.titleLbls.first!
         let bottomLineX = firstLbl.frame.origin.x
         let bottomLineW = firstLbl.frame.width
-        let bottomLineH = self.style.bottomLineHeight
-        let bottomLineY = self.style.titleViewHeight - self.style.bottomLineHeight
+        let bottomLineH = self.style.title.bottomLineHeight
+        let bottomLineY = self.style.title.height - self.style.title.bottomLineHeight
         let bottomLine = UIView()
-        bottomLine.backgroundColor = self.style.bottomLineColor
+        bottomLine.backgroundColor = self.style.title.bottomLineColor
         bottomLine.frame = CGRect(x: bottomLineX, y: bottomLineY, width: bottomLineW, height: bottomLineH)
         return bottomLine
     }()
     
-    init(frame: CGRect, titles: [String],style: FFCategoryTitleStyle) {
+    init(frame: CGRect, titles: [String],style: FFCategoryStyle) {
         self.style = style
         self.titles = titles
         super.init(frame: frame)
@@ -81,14 +81,14 @@ extension FFCategoryTitleView {
         
         addLbl()
         
-        if style.isShowBottomLine {
+        if style.title.isShowBottomLine {
           scrollView.addSubview(bottomLine)
         }
     }
     
     
     private func addLbl() {
-        let lblH = style.titleViewHeight
+        let lblH = self.style.title.height
         let lblY = CGFloat(0)
         var lblX = CGFloat(0)
         var lblW = CGFloat(0)
@@ -97,8 +97,8 @@ extension FFCategoryTitleView {
             let lbl = UILabel()
             lbl.tag = i
             lbl.text = title
-            lbl.font = style.normalTitleFont
-            lbl.textColor = style.normalTitleColor
+            lbl.font = style.title.normalFont
+            lbl.textColor = style.title.normalColor
             lbl.textAlignment = .center
             lbl.isUserInteractionEnabled = true
 //            lbl.backgroundColor = UIColor.random
@@ -109,27 +109,27 @@ extension FFCategoryTitleView {
 
             // 计算X和W
             lblW = (title as NSString).boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 0), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName:  lbl.font], context: nil).width
-            i == 0 ? (lblX =  style.leftMargin) : (lblX = titleLbls[i - 1].frame.maxX + style.margin)
+            i == 0 ? (lblX =  style.title.leftMargin) : (lblX = titleLbls[i - 1].frame.maxX + style.title.margin)
             // 设置尺寸
             lbl.frame = CGRect(x: lblX, y: lblY, width: lblW, height: lblH)
             // 设置默认选中
             if i == 0 {
-                lbl.textColor = style.selectTitleColor
+                lbl.textColor = style.title.selectColor
                 selectedLbl = lbl
-                if style.isNeedScale {
-                    lbl.transform = CGAffineTransform(scaleX: style.maxScale, y: style.maxScale)
+                if style.title.isNeedScale {
+                    lbl.transform = CGAffineTransform(scaleX: style.title.maxScale, y: style.title.maxScale)
              }
           }
             
         }
         
-        let contentWidth = (titleLbls.last?.frame.maxX)! + style.rightMargin
+        let contentWidth = (titleLbls.last?.frame.maxX)! + style.title.rightMargin
         // 如果超过屏幕宽度就要滚动，没有超过屏幕宽度需要平分,不能滚动
         if (contentWidth > bounds.width) {
             isScrollEnable = true
         }
         if isScrollEnable { // 滚动
-            scrollView.contentSize = CGSize(width: (titleLbls.last?.frame.maxX)! + style.rightMargin, height: 0)
+            scrollView.contentSize = CGSize(width: (titleLbls.last?.frame.maxX)! + style.title.rightMargin, height: 0)
         }
         if !isScrollEnable { // 不滚动
             lblW = bounds.width / CGFloat(titleLbls.count)
@@ -182,12 +182,12 @@ extension FFCategoryTitleView {
     fileprivate func handlerLblColorAndScale(lbl: UILabel) {
     
         UIView.animate(withDuration: 0.25) { 
-            self.selectedLbl?.textColor = self.style.normalTitleColor
-            lbl.textColor = self.style.selectTitleColor
+            self.selectedLbl?.textColor = self.style.title.normalColor
+            lbl.textColor = self.style.title.selectColor
             
-            if self.style.isNeedScale {
+            if self.style.title.isNeedScale {
                 self.selectedLbl?.transform = CGAffineTransform.identity
-                lbl.transform = CGAffineTransform(scaleX: self.style.maxScale, y: self.style.maxScale)
+                lbl.transform = CGAffineTransform(scaleX: self.style.title.maxScale, y: self.style.title.maxScale)
             }
             self.selectedLbl = lbl
         }
@@ -205,37 +205,57 @@ extension FFCategoryTitleView {
 }
 
 
-extension FFCategoryTitleView: FFCategoryContentViewDelegate {
+extension FFCategoryTitleView: FFCategoryContentViewDelegate, FFCategoryKeyboardViewDelegate {
 
     // 一直滚动
     func categoryContentView(_ categoryContentView: FFCategoryContentView, sourceIndex: Int, targetIndex: Int, progress: CGFloat) {
+      didScrolling(sourceIndex: sourceIndex, targetIndex: targetIndex, progress: progress)
+   }
+    
+    // 结束滚动
+    func categoryContentView(_ categoryContentView: FFCategoryContentView, didEndScrollAt index: Int) {
+        
+         didScrollEnd(at: index)
+    }
+    
+    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, sourceIndex: Int, targetIndex: Int, progress: CGFloat) {
+        didScrolling(sourceIndex: sourceIndex, targetIndex: targetIndex, progress: progress)
+    }
+    
+    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, didEndScrollAt index: Int) {
+       didScrollEnd(at: index)
+    }
+    
+    
+    private func didScrolling(sourceIndex: Int, targetIndex: Int, progress: CGFloat) {
+    
         // 颜色渐变
         let sourceLbl = titleLbls[sourceIndex]
         let targetLbl = titleLbls[targetIndex]
         sourceLbl.textColor = UIColor.init(red: sourceRGB.0 - deltaRGB.0 * progress , green: sourceRGB.1 - deltaRGB.1 * progress, blue: sourceRGB.2 - deltaRGB.2 * progress, alpha: 1.0)
         targetLbl.textColor = UIColor.init(red: targetRGB.0 + deltaRGB.0 * progress , green: targetRGB.1 + deltaRGB.1 * progress, blue: targetRGB.2 + deltaRGB.2 * progress, alpha: 1.0)
         print(sourceIndex, targetIndex, progress)
-
+        
         // 文字缩放
-        if style.isNeedScale {
-        let deltaScale = style.maxScale - 1
-        sourceLbl.transform = CGAffineTransform(scaleX: style.maxScale - deltaScale * progress , y: style.maxScale - deltaScale * progress)
-        targetLbl.transform = CGAffineTransform(scaleX: 1 + deltaScale * progress , y: 1 + deltaScale * progress)
-     }
+        if style.title.isNeedScale {
+            let deltaScale = style.title.maxScale - 1
+            sourceLbl.transform = CGAffineTransform(scaleX: style.title.maxScale - deltaScale * progress , y: style.title.maxScale - deltaScale * progress)
+            targetLbl.transform = CGAffineTransform(scaleX: 1 + deltaScale * progress , y: 1 + deltaScale * progress)
+        }
         
         
         // 底部线条移动
-        if style.isShowBottomLine {
+        if style.title.isShowBottomLine {
             let deltaX = targetLbl.frame.origin.x - sourceLbl.frame.origin.x
             let deltaW = targetLbl.frame.width - sourceLbl.frame.width
             self.bottomLine.frame.origin.x = sourceLbl.frame.origin.x + deltaX * progress
             self.bottomLine.frame.size.width = sourceLbl.frame.width + deltaW * progress
+        }
+
     }
-}
     
-    // 结束滚动
-    func categoryContentView(_ categoryContentView: FFCategoryContentView, didEndScrollAt index: Int) {
-        
+    
+    private func didScrollEnd(at index: Int) {
         let lbl = titleLbls[index]
         handlerLblColorAndScale(lbl: lbl)
         handlerBottomLineLocation(lbl: lbl)
@@ -246,5 +266,6 @@ extension FFCategoryTitleView: FFCategoryContentViewDelegate {
         
         handlerLblScroll(lbl: lbl)
     }
+    
 
 }
