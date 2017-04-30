@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, FFCategoryHUDDataSource{
+class ViewController: UIViewController, FFCategoryHUDDataSource,FFCategoryHUDDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +33,7 @@ class ViewController: UIViewController, FFCategoryHUDDataSource{
         let categoryHUD = FFCategoryHUD.init(frame: categoryHUDFrame, titles: titles, style: style, layout: layout )
         categoryHUD.dataSource = self
         categoryHUD.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "h")
+        categoryHUD.delegate = self
         view.addSubview(categoryHUD)
         
 
@@ -61,6 +62,9 @@ class ViewController: UIViewController, FFCategoryHUDDataSource{
     }
 
     
+    func categoryHUD(_ categoryHUD: FFCategoryHUD, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath)
+    }
     
     
     override func didReceiveMemoryWarning() {

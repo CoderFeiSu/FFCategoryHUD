@@ -9,8 +9,11 @@
 import UIKit
 
 protocol FFCategoryKeyboardViewDelegate: class {
-    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, sourceIndex: Int, targetIndex: Int, progress: CGFloat)
     func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, didEndScrollAt index: Int)
+}
+
+protocol FFCategoryKeyboardViewAction: class {
+    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, didSelectItemAt indexPath: IndexPath)
 }
 
 protocol FFCategoryKeyboardViewDataSource : class {
@@ -23,6 +26,7 @@ class FFCategoryKeyboardView: UIView {
 
     weak var delegate: FFCategoryKeyboardViewDelegate?
     weak var dataSource: FFCategoryKeyboardViewDataSource?
+    weak var action: FFCategoryKeyboardViewAction?
     
     fileprivate var  style: FFCategoryStyle
     fileprivate var  layout: FFCategoryKeyboardLayout
@@ -106,13 +110,14 @@ extension FFCategoryKeyboardView: UICollectionViewDataSource, UICollectionViewDe
          return cell!
     }
     
-
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.action?.categoryKeyboardView(self, didSelectItemAt: indexPath)
+    }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if (!decelerate) {
             scrollViewDidEndDecelerating(scrollView)
-        }
+     }
  }
     
     

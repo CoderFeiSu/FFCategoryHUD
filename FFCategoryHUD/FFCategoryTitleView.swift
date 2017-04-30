@@ -218,10 +218,6 @@ extension FFCategoryTitleView: FFCategoryContentViewDelegate, FFCategoryKeyboard
          didScrollEnd(at: index)
     }
     
-    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, sourceIndex: Int, targetIndex: Int, progress: CGFloat) {
-        didScrolling(sourceIndex: sourceIndex, targetIndex: targetIndex, progress: progress)
-    }
-    
     func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, didEndScrollAt index: Int) {
        didScrollEnd(at: index)
     }

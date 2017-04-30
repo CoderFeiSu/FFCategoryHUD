@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol FFCategoryHUDDelegate : class {
+   func categoryHUD(_ categoryHUD: FFCategoryHUD, didSelectItemAt indexPath: IndexPath)
+}
+
 protocol FFCategoryHUDDataSource : class {
     func numberOfSections(in categoryHUD: FFCategoryHUD) -> Int
     func categoryHUD(_ categoryHUD: FFCategoryHUD, numberOfItemsInSection section: Int) -> Int
@@ -17,6 +21,7 @@ protocol FFCategoryHUDDataSource : class {
 class FFCategoryHUD: UIView {
     
     weak var dataSource: FFCategoryHUDDataSource?
+    weak var delegate: FFCategoryHUDDelegate?
     
     // 如果为分图片键盘childVCs和parentVC都为nil
     fileprivate var style: FFCategoryStyle
@@ -117,6 +122,7 @@ extension FFCategoryHUD {
           titleView.delegate = keyboardView
           keyboardView.delegate = titleView
           keyboardView.dataSource = self
+          keyboardView.action = self
           self.keyboardView = keyboardView
            addSubview(keyboardView)
         } else {
@@ -138,7 +144,7 @@ extension FFCategoryHUD {
 }
 
 
-extension FFCategoryHUD: FFCategoryKeyboardViewDataSource {
+extension FFCategoryHUD: FFCategoryKeyboardViewDataSource, FFCategoryKeyboardViewAction {
    
     func numberOfSections(in categoryKeyboardView: FFCategoryKeyboardView) -> Int {
         assert(dataSource != nil, "dataSource不能为空")
@@ -156,6 +162,10 @@ extension FFCategoryHUD: FFCategoryKeyboardViewDataSource {
     func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dataSource?.categoryHUD(self, collectionView: collectionView, cellForItemAt: indexPath)
         return cell!
+    }
+    
+    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, didSelectItemAt indexPath: IndexPath) {
+        self.delegate?.categoryHUD(self, didSelectItemAt: indexPath)
     }
 
 }
