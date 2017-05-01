@@ -12,21 +12,22 @@ protocol FFCategoryKeyboardViewDelegate: class {
     func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, didEndScrollAt index: Int)
 }
 
-protocol FFCategoryKeyboardViewAction: class {
-    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, didSelectItemAt indexPath: IndexPath)
+@objc protocol FFCategoryKeyboardViewActionDelegate: class {
+    @objc optional func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, didSelectItemAt indexPath: IndexPath)
+    @objc optional func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, didDeselectItemAt indexPath: IndexPath)
 }
 
 protocol FFCategoryKeyboardViewDataSource : class {
     func numberOfSections(in categoryKeyboardView: FFCategoryKeyboardView) -> Int
     func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, numberOfItemsInSection section: Int) -> Int
-    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, collectionView: UICollectionView,cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
 }
 
 class FFCategoryKeyboardView: UIView {
 
     weak var delegate: FFCategoryKeyboardViewDelegate?
     weak var dataSource: FFCategoryKeyboardViewDataSource?
-    weak var action: FFCategoryKeyboardViewAction?
+    weak var actionDelegate: FFCategoryKeyboardViewActionDelegate?
     
     fileprivate var  style: FFCategoryStyle
     fileprivate var  layout: FFCategoryKeyboardLayout
@@ -45,6 +46,7 @@ class FFCategoryKeyboardView: UIView {
         cv.delegate = self
         cv.dataSource = self
         cv.backgroundColor = self.style.contentBackgroundColor
+        cv.alpha = self.style.contentAlpha
         return cv
     }()
     fileprivate lazy var pageControl: UIPageControl = {
@@ -53,6 +55,7 @@ class FFCategoryKeyboardView: UIView {
         pc.pageIndicatorTintColor = UIColor.lightGray
         pc.currentPageIndicatorTintColor = UIColor.gray
         pc.backgroundColor = self.style.contentBackgroundColor
+        pc.alpha = self.style.contentAlpha
         let pcX: CGFloat = 0
         let pcY: CGFloat = self.collectionView.frame.height
         let pcW: CGFloat = self.bounds.width
@@ -86,6 +89,10 @@ extension FFCategoryKeyboardView {
         collectionView.reloadData()
     }
     
+    open func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionViewCell {
+     return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+    }
+    
 }
 
 
@@ -106,12 +113,17 @@ extension FFCategoryKeyboardView: UICollectionViewDataSource, UICollectionViewDe
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         let  cell = dataSource?.categoryKeyboardView(self, collectionView: collectionView, cellForItemAt: indexPath)
+         let  cell = dataSource?.categoryKeyboardView(self, cellForItemAt: indexPath)
          return cell!
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.action?.categoryKeyboardView(self, didSelectItemAt: indexPath)
+        self.actionDelegate?.categoryKeyboardView?(self,didSelectItemAt: indexPath)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        self.actionDelegate?.categoryKeyboardView?(self, didDeselectItemAt: indexPath)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -131,7 +143,6 @@ extension FFCategoryKeyboardView: UICollectionViewDataSource, UICollectionViewDe
     
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-         print(#function, scrollView.contentOffset.x )
         if isAutoScoll {
            isAutoScoll = false
            var offsetX = scrollView.contentOffset.x - 10

@@ -8,14 +8,15 @@
 
 import UIKit
 
-protocol FFCategoryHUDDelegate : class {
-   func categoryHUD(_ categoryHUD: FFCategoryHUD, didSelectItemAt indexPath: IndexPath)
+@objc protocol FFCategoryHUDDelegate : class {
+   @objc optional func categoryHUD(_ categoryHUD: FFCategoryHUD,didSelectItemAt indexPath: IndexPath)
+   @objc optional func categoryHUD(_ categoryHUD: FFCategoryHUD, didDeselectItemAt indexPath: IndexPath)
 }
 
 protocol FFCategoryHUDDataSource : class {
     func numberOfSections(in categoryHUD: FFCategoryHUD) -> Int
     func categoryHUD(_ categoryHUD: FFCategoryHUD, numberOfItemsInSection section: Int) -> Int
-    func categoryHUD(_ categoryHUD: FFCategoryHUD, collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    func categoryHUD(_ categoryHUD: FFCategoryHUD, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
 }
 
 class FFCategoryHUD: UIView {
@@ -92,6 +93,9 @@ extension FFCategoryHUD {
        self.keyboardView?.reloadData()
     }
     
+    func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionViewCell {
+      return (self.keyboardView?.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath))!
+    }
 }
 
 
@@ -122,7 +126,7 @@ extension FFCategoryHUD {
           titleView.delegate = keyboardView
           keyboardView.delegate = titleView
           keyboardView.dataSource = self
-          keyboardView.action = self
+          keyboardView.actionDelegate = self
           self.keyboardView = keyboardView
            addSubview(keyboardView)
         } else {
@@ -131,7 +135,6 @@ extension FFCategoryHUD {
                 return
         }
           let contentView = FFCategoryContentView.init(frame:frame, style: style, childVCs: childVCs, parentVC: parentVC)
-          contentView.backgroundColor = style.contentBackgroundColor
           titleView.delegate = contentView
           contentView.delegate = titleView
           addSubview(contentView)
@@ -144,7 +147,7 @@ extension FFCategoryHUD {
 }
 
 
-extension FFCategoryHUD: FFCategoryKeyboardViewDataSource, FFCategoryKeyboardViewAction {
+extension FFCategoryHUD: FFCategoryKeyboardViewDataSource, FFCategoryKeyboardViewActionDelegate {
    
     func numberOfSections(in categoryKeyboardView: FFCategoryKeyboardView) -> Int {
         assert(dataSource != nil, "dataSource不能为空")
@@ -159,13 +162,17 @@ extension FFCategoryHUD: FFCategoryKeyboardViewDataSource, FFCategoryKeyboardVie
     }
     
     
-    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = dataSource?.categoryHUD(self, collectionView: collectionView, cellForItemAt: indexPath)
+    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = dataSource?.categoryHUD(self, cellForItemAt: indexPath)
         return cell!
     }
     
-    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, didSelectItemAt indexPath: IndexPath) {
-        self.delegate?.categoryHUD(self, didSelectItemAt: indexPath)
+    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView,didSelectItemAt indexPath: IndexPath) {
+        self.delegate?.categoryHUD?(self, didSelectItemAt: indexPath)
+    }
+    
+    func categoryKeyboardView(_ categoryKeyboardView: FFCategoryKeyboardView, didDeselectItemAt indexPath: IndexPath) {
+        self.delegate?.categoryHUD?(self, didDeselectItemAt: indexPath)
     }
 
 }

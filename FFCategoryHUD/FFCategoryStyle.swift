@@ -23,6 +23,8 @@ struct FFCategoryStyle {
     var isTitleOnTop: Bool = true
     /** 内容背景颜色 */
     var contentBackgroundColor: UIColor = UIColor.groupTableViewBackground
+    /** 内容背景颜色 */
+    var contentAlpha: CGFloat = 1.0
     
 }
 

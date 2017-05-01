@@ -38,6 +38,8 @@ class FFCategoryContentView: UIView {
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kContentCellID)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = self.style.contentBackgroundColor
+        collectionView.alpha = self.style.contentAlpha
         return collectionView
     }()
     

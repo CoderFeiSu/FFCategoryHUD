@@ -18,7 +18,7 @@ class ViewController: UIViewController, FFCategoryHUDDataSource,FFCategoryHUDDel
         let categoryHUDFrame = CGRect(x: 0, y: 64, width: 375, height: 216)
         let titles = ["哈哈df","哈哈哈sdfas","哈哈哈333","哈","134124哈哈哈","说就撒了开发商"]
         var style = FFCategoryStyle()
-        style.contentBackgroundColor = UIColor.blue
+//        style.contentBackgroundColor = UIColor.init(white: 0, alpha: 0.5)
         style.title.isShowBottomLine = true
         style.title.isNeedScale = true
         style.title.bottomLineColor = UIColor.red
@@ -55,15 +55,21 @@ class ViewController: UIViewController, FFCategoryHUDDataSource,FFCategoryHUDDel
     }
     
     
-    func categoryHUD(_ categoryHUD: FFCategoryHUD, collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "h", for: indexPath)
+    func categoryHUD(_ categoryHUD: FFCategoryHUD, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = categoryHUD.dequeueReusableCell(withReuseIdentifier: "h", for: indexPath)
         cell.backgroundColor = UIColor.random
         return cell
     }
 
     
-    func categoryHUD(_ categoryHUD: FFCategoryHUD, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
+    func categoryHUD(_ categoryHUD: FFCategoryHUD,didSelectItemAt indexPath: IndexPath) {
+        let cell = categoryHUD.dequeueReusableCell(withReuseIdentifier: "h", for: indexPath)
+        print(cell)
+    }
+    
+    func categoryHUD(_ categoryHUD: FFCategoryHUD, didDeselectItemAt indexPath: IndexPath) {
+        let cell = categoryHUD.dequeueReusableCell(withReuseIdentifier: "h", for: indexPath)
+        print(cell)
     }
     
     
