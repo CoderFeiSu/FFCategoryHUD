@@ -8,9 +8,6 @@
 
 import UIKit
 
-
-
-
 struct FFCategoryStyle {
     
     /** 是否是图片键盘, 当为图片键盘时需要设置dataSource，不为图片键盘时需要设置ChildVCs和ParentVC */

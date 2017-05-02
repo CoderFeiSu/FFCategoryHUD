@@ -92,6 +92,9 @@ extension FFCategoryKeyboardView {
     open func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionViewCell {
      return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
+    open func cellForItem(at indexPath: IndexPath) -> UICollectionViewCell? {
+      return collectionView.cellForItem(at: indexPath)
+    }
     
 }
 
@@ -118,6 +121,7 @@ extension FFCategoryKeyboardView: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         self.actionDelegate?.categoryKeyboardView?(self,didSelectItemAt: indexPath)
     }
     
@@ -125,6 +129,8 @@ extension FFCategoryKeyboardView: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         self.actionDelegate?.categoryKeyboardView?(self, didDeselectItemAt: indexPath)
     }
+    
+    
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if (!decelerate) {

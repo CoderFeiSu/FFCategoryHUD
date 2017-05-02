@@ -63,12 +63,13 @@ class ViewController: UIViewController, FFCategoryHUDDataSource,FFCategoryHUDDel
 
     
     func categoryHUD(_ categoryHUD: FFCategoryHUD,didSelectItemAt indexPath: IndexPath) {
-        let cell = categoryHUD.dequeueReusableCell(withReuseIdentifier: "h", for: indexPath)
+        
+        let cell = categoryHUD.cellForItem(at: indexPath)
         print(cell)
     }
     
     func categoryHUD(_ categoryHUD: FFCategoryHUD, didDeselectItemAt indexPath: IndexPath) {
-        let cell = categoryHUD.dequeueReusableCell(withReuseIdentifier: "h", for: indexPath)
+        let cell = categoryHUD.cellForItem(at: indexPath)
         print(cell)
     }
     

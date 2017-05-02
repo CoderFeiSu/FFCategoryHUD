@@ -96,6 +96,9 @@ extension FFCategoryHUD {
     func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionViewCell {
       return (self.keyboardView?.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath))!
     }
+     func cellForItem(at indexPath: IndexPath) -> UICollectionViewCell? {
+        return self.keyboardView?.cellForItem(at: indexPath)
+    }
 }
 
 
@@ -140,10 +143,6 @@ extension FFCategoryHUD {
           addSubview(contentView)
         }
     }
-    
-    
-    
-
 }
 
 
