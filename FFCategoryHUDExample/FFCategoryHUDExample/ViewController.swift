@@ -23,6 +23,7 @@ class ViewController: UIViewController, FFCategoryHUDDataSource,FFCategoryHUDDel
         style.title.isNeedScale = true
         style.title.bottomLineColor = UIColor.red
         style.isImageKeyboard = true
+        style.keyboard.pageControlAlignment = .bottom
         let layout = FFCategoryKeyboardLayout()
         var childVCs = [UIViewController]()
         for _ in 0..<titles.count {
@@ -34,6 +35,7 @@ class ViewController: UIViewController, FFCategoryHUDDataSource,FFCategoryHUDDel
         categoryHUD.dataSource = self
         categoryHUD.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "h")
         categoryHUD.delegate = self
+        categoryHUD.backgroundColor = UIColor.brown
         view.addSubview(categoryHUD)
         
 
@@ -48,7 +50,7 @@ class ViewController: UIViewController, FFCategoryHUDDataSource,FFCategoryHUDDel
     func categoryHUD(_ categoryHUD: FFCategoryHUD, numberOfItemsInSection section: Int) -> Int {
    
         if (section % 2 == 0) {
-            return  22
+            return  1
         } else {
             return 50
         }

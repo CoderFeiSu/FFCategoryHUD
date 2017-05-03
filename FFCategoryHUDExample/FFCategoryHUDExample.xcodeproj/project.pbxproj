@@ -17,7 +17,7 @@
 		06D795261EA84E84008D48F1 /* FFCategoryHUDExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795251EA84E84008D48F1 /* FFCategoryHUDExampleTests.swift */; };
 		06D795311EA84E84008D48F1 /* FFCategoryHUDExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795301EA84E84008D48F1 /* FFCategoryHUDExampleUITests.swift */; };
 		06D795401EA84FC0008D48F1 /* FFCategoryHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D7953F1EA84FC0008D48F1 /* FFCategoryHUD.swift */; };
-		06D795421EA84FE5008D48F1 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795411EA84FE5008D48F1 /* UIColor+Extension.swift */; };
+		06D795421EA84FE5008D48F1 /* UIColor+FFExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795411EA84FE5008D48F1 /* UIColor+FFExtension.swift */; };
 		06D795441EA84FFA008D48F1 /* FFCategoryTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795431EA84FFA008D48F1 /* FFCategoryTitleView.swift */; };
 		06D795461EA85038008D48F1 /* FFCategoryContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795451EA85038008D48F1 /* FFCategoryContentView.swift */; };
 		06D795481EA8505D008D48F1 /* FFCategoryStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795471EA8505D008D48F1 /* FFCategoryStyle.swift */; };
@@ -57,7 +57,7 @@
 		06D795301EA84E84008D48F1 /* FFCategoryHUDExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFCategoryHUDExampleUITests.swift; sourceTree = "<group>"; };
 		06D795321EA84E84008D48F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06D7953F1EA84FC0008D48F1 /* FFCategoryHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFCategoryHUD.swift; sourceTree = "<group>"; };
-		06D795411EA84FE5008D48F1 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		06D795411EA84FE5008D48F1 /* UIColor+FFExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+FFExtension.swift"; sourceTree = "<group>"; };
 		06D795431EA84FFA008D48F1 /* FFCategoryTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFCategoryTitleView.swift; sourceTree = "<group>"; };
 		06D795451EA85038008D48F1 /* FFCategoryContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFCategoryContentView.swift; sourceTree = "<group>"; };
 		06D795471EA8505D008D48F1 /* FFCategoryStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFCategoryStyle.swift; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 				06D795451EA85038008D48F1 /* FFCategoryContentView.swift */,
 				06CF82E61EAE58B60018438A /* FFCategoryKeyboardView.swift */,
 				06450B541EACC6660040C573 /* FFCategoryKeyboardLayout.swift */,
-				06D795411EA84FE5008D48F1 /* UIColor+Extension.swift */,
+				06D795411EA84FE5008D48F1 /* UIColor+FFExtension.swift */,
 			);
 			name = FFCategoryHUD;
 			path = ../../FFCategoryHUD;
@@ -297,7 +297,7 @@
 				06CF82E71EAE58B60018438A /* FFCategoryKeyboardView.swift in Sources */,
 				06D795111EA84E84008D48F1 /* AppDelegate.swift in Sources */,
 				06D795461EA85038008D48F1 /* FFCategoryContentView.swift in Sources */,
-				06D795421EA84FE5008D48F1 /* UIColor+Extension.swift in Sources */,
+				06D795421EA84FE5008D48F1 /* UIColor+FFExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

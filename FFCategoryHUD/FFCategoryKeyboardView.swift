@@ -33,6 +33,7 @@ class FFCategoryKeyboardView: UIView {
     fileprivate var  layout: FFCategoryKeyboardLayout
     fileprivate lazy var lastSection: Int = 0
     fileprivate lazy var isAutoScoll: Bool = false
+    fileprivate lazy var pageControl: UIPageControl = UIPageControl()
     fileprivate lazy var collectionView: UICollectionView = {
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.layout)
         let cvX: CGFloat = 0
@@ -49,19 +50,28 @@ class FFCategoryKeyboardView: UIView {
         cv.alpha = self.style.contentAlpha
         return cv
     }()
-    fileprivate lazy var pageControl: UIPageControl = {
+    fileprivate lazy var pageControlView: UIView = {
+        let pageControlView = UIView()
+        pageControlView.backgroundColor = self.style.contentBackgroundColor
+        pageControlView.alpha = self.style.contentAlpha
+        let pageControlViewX: CGFloat = 0
+        let pageControlViewH: CGFloat = self.style.keyboard.pageControlHeight
+        let pageControlViewY: CGFloat = self.collectionView.frame.height
+        let pageControlViewW: CGFloat = self.bounds.width
+        pageControlView.frame = CGRect(x: pageControlViewX, y: pageControlViewY, width: pageControlViewW, height: pageControlViewH)
         let pc = UIPageControl()
         pc.currentPage = 0
         pc.pageIndicatorTintColor = UIColor.lightGray
         pc.currentPageIndicatorTintColor = UIColor.gray
-        pc.backgroundColor = self.style.contentBackgroundColor
-        pc.alpha = self.style.contentAlpha
         let pcX: CGFloat = 0
-        let pcY: CGFloat = self.collectionView.frame.height
+        let pcH: CGFloat = 0
+        var pcY: CGFloat = 0
+        self.style.keyboard.pageControlAlignment == .top ? (pcY = 4) : (pcY = pageControlViewH - 4)
         let pcW: CGFloat = self.bounds.width
-        let pcH: CGFloat = self.style.keyboard.pageControlHeight
         pc.frame = CGRect(x: pcX, y: pcY, width: pcW, height: pcH)
-        return pc
+        pageControlView.addSubview(pc)
+        self.pageControl = pc
+        return pageControlView
     }()
     
     
@@ -70,7 +80,7 @@ class FFCategoryKeyboardView: UIView {
         self.layout = layout
         super.init(frame: frame)
         addSubview(collectionView)
-        addSubview(pageControl)
+        addSubview(pageControlView)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -54,6 +54,10 @@ struct FFCategoryTitleStyle {
     var maxScale: CGFloat = 1.2
 }
 
+enum FFAlignment {
+    case top
+    case bottom
+}
 
 
 // 键盘样式
@@ -61,6 +65,7 @@ struct FFCategoryTitleStyle {
  
     /** pageControl高度 */
     var pageControlHeight: CGFloat = 20
+    var pageControlAlignment: FFAlignment = .top
 }
 
 
