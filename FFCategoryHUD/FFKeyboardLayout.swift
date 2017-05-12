@@ -31,9 +31,7 @@ extension FFCategoryKeyboardLayout {
     override func prepare() {
         super.prepare()
         
-        guard let collectionView = collectionView else {
-            return
-    }
+        guard let collectionView = collectionView else {return}
         
        let sections =  collectionView.numberOfSections 
        var previousTotalPages = 0
@@ -51,7 +49,6 @@ extension FFCategoryKeyboardLayout {
             }
          previousTotalPages += ((items - 1) / (rows * cols) + 1)
      }
-      
         totalPages = previousTotalPages
    }
 
