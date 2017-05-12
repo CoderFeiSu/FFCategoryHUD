@@ -28,6 +28,7 @@ class FFSegmentContainer: UIView {
         self.barStyle = barStyle
         self.childVCs = childVCs
         self.parentVC = parentVC
+        
         super.init(frame: frame)
     
         // 添加子控件

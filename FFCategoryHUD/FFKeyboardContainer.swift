@@ -1,4 +1,3 @@
-//
 //  FFImageKeyboardContainer.swift
 //  FFCategoryHUDExample
 //
