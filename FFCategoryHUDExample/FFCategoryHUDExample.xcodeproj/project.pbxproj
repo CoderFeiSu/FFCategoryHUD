@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06450B551EACC6660040C573 /* FFCategoryKeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06450B541EACC6660040C573 /* FFCategoryKeyboardLayout.swift */; };
-		06CF82E71EAE58B60018438A /* FFCategoryKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CF82E61EAE58B60018438A /* FFCategoryKeyboardView.swift */; };
+		06450B551EACC6660040C573 /* FFKeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06450B541EACC6660040C573 /* FFKeyboardLayout.swift */; };
+		06CF82E71EAE58B60018438A /* FFKeyboardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CF82E61EAE58B60018438A /* FFKeyboardContent.swift */; };
 		06D795111EA84E84008D48F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795101EA84E84008D48F1 /* AppDelegate.swift */; };
 		06D795131EA84E84008D48F1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795121EA84E84008D48F1 /* ViewController.swift */; };
 		06D795161EA84E84008D48F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06D795141EA84E84008D48F1 /* Main.storyboard */; };
@@ -16,11 +16,14 @@
 		06D7951B1EA84E84008D48F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06D795191EA84E84008D48F1 /* LaunchScreen.storyboard */; };
 		06D795261EA84E84008D48F1 /* FFCategoryHUDExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795251EA84E84008D48F1 /* FFCategoryHUDExampleTests.swift */; };
 		06D795311EA84E84008D48F1 /* FFCategoryHUDExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795301EA84E84008D48F1 /* FFCategoryHUDExampleUITests.swift */; };
-		06D795401EA84FC0008D48F1 /* FFCategoryHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D7953F1EA84FC0008D48F1 /* FFCategoryHUD.swift */; };
+		06D795401EA84FC0008D48F1 /* FFSegmentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D7953F1EA84FC0008D48F1 /* FFSegmentContainer.swift */; };
 		06D795421EA84FE5008D48F1 /* UIColor+FFExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795411EA84FE5008D48F1 /* UIColor+FFExtension.swift */; };
-		06D795441EA84FFA008D48F1 /* FFCategoryTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795431EA84FFA008D48F1 /* FFCategoryTitleView.swift */; };
-		06D795461EA85038008D48F1 /* FFCategoryContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795451EA85038008D48F1 /* FFCategoryContentView.swift */; };
-		06D795481EA8505D008D48F1 /* FFCategoryStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795471EA8505D008D48F1 /* FFCategoryStyle.swift */; };
+		06D795441EA84FFA008D48F1 /* FFSegmentBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795431EA84FFA008D48F1 /* FFSegmentBar.swift */; };
+		06D795461EA85038008D48F1 /* FFSegmentContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795451EA85038008D48F1 /* FFSegmentContent.swift */; };
+		06D795481EA8505D008D48F1 /* FFSegmentBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D795471EA8505D008D48F1 /* FFSegmentBarStyle.swift */; };
+		06DC00DB1EC5A13C00FD579B /* FFKeyboardContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DC00DA1EC5A13C00FD579B /* FFKeyboardContainer.swift */; };
+		06DC00DD1EC5A20600FD579B /* FFKeyboardBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DC00DC1EC5A20600FD579B /* FFKeyboardBar.swift */; };
+		06DC00DF1EC5A21900FD579B /* FFKeyboardBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DC00DE1EC5A21900FD579B /* FFKeyboardBarStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,8 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		06450B541EACC6660040C573 /* FFCategoryKeyboardLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFCategoryKeyboardLayout.swift; sourceTree = "<group>"; };
-		06CF82E61EAE58B60018438A /* FFCategoryKeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFCategoryKeyboardView.swift; sourceTree = "<group>"; };
+		06450B541EACC6660040C573 /* FFKeyboardLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFKeyboardLayout.swift; sourceTree = "<group>"; };
+		06CF82E61EAE58B60018438A /* FFKeyboardContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFKeyboardContent.swift; sourceTree = "<group>"; };
 		06D7950D1EA84E84008D48F1 /* FFCategoryHUDExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FFCategoryHUDExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06D795101EA84E84008D48F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		06D795121EA84E84008D48F1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,11 +59,14 @@
 		06D7952C1EA84E84008D48F1 /* FFCategoryHUDExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FFCategoryHUDExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06D795301EA84E84008D48F1 /* FFCategoryHUDExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFCategoryHUDExampleUITests.swift; sourceTree = "<group>"; };
 		06D795321EA84E84008D48F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		06D7953F1EA84FC0008D48F1 /* FFCategoryHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFCategoryHUD.swift; sourceTree = "<group>"; };
+		06D7953F1EA84FC0008D48F1 /* FFSegmentContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFSegmentContainer.swift; sourceTree = "<group>"; };
 		06D795411EA84FE5008D48F1 /* UIColor+FFExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+FFExtension.swift"; sourceTree = "<group>"; };
-		06D795431EA84FFA008D48F1 /* FFCategoryTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFCategoryTitleView.swift; sourceTree = "<group>"; };
-		06D795451EA85038008D48F1 /* FFCategoryContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFCategoryContentView.swift; sourceTree = "<group>"; };
-		06D795471EA8505D008D48F1 /* FFCategoryStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFCategoryStyle.swift; sourceTree = "<group>"; };
+		06D795431EA84FFA008D48F1 /* FFSegmentBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFSegmentBar.swift; sourceTree = "<group>"; };
+		06D795451EA85038008D48F1 /* FFSegmentContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFSegmentContent.swift; sourceTree = "<group>"; };
+		06D795471EA8505D008D48F1 /* FFSegmentBarStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFSegmentBarStyle.swift; sourceTree = "<group>"; };
+		06DC00DA1EC5A13C00FD579B /* FFKeyboardContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFKeyboardContainer.swift; sourceTree = "<group>"; };
+		06DC00DC1EC5A20600FD579B /* FFKeyboardBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFKeyboardBar.swift; sourceTree = "<group>"; };
+		06DC00DE1EC5A21900FD579B /* FFKeyboardBarStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFKeyboardBarStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,12 +149,15 @@
 		06D7953E1EA84FAF008D48F1 /* FFCategoryHUD */ = {
 			isa = PBXGroup;
 			children = (
-				06D7953F1EA84FC0008D48F1 /* FFCategoryHUD.swift */,
-				06D795471EA8505D008D48F1 /* FFCategoryStyle.swift */,
-				06D795431EA84FFA008D48F1 /* FFCategoryTitleView.swift */,
-				06D795451EA85038008D48F1 /* FFCategoryContentView.swift */,
-				06CF82E61EAE58B60018438A /* FFCategoryKeyboardView.swift */,
-				06450B541EACC6660040C573 /* FFCategoryKeyboardLayout.swift */,
+				06D7953F1EA84FC0008D48F1 /* FFSegmentContainer.swift */,
+				06D795431EA84FFA008D48F1 /* FFSegmentBar.swift */,
+				06D795471EA8505D008D48F1 /* FFSegmentBarStyle.swift */,
+				06D795451EA85038008D48F1 /* FFSegmentContent.swift */,
+				06DC00DA1EC5A13C00FD579B /* FFKeyboardContainer.swift */,
+				06DC00DC1EC5A20600FD579B /* FFKeyboardBar.swift */,
+				06DC00DE1EC5A21900FD579B /* FFKeyboardBarStyle.swift */,
+				06CF82E61EAE58B60018438A /* FFKeyboardContent.swift */,
+				06450B541EACC6660040C573 /* FFKeyboardLayout.swift */,
 				06D795411EA84FE5008D48F1 /* UIColor+FFExtension.swift */,
 			);
 			name = FFCategoryHUD;
@@ -289,14 +298,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06D795441EA84FFA008D48F1 /* FFCategoryTitleView.swift in Sources */,
-				06D795401EA84FC0008D48F1 /* FFCategoryHUD.swift in Sources */,
-				06450B551EACC6660040C573 /* FFCategoryKeyboardLayout.swift in Sources */,
-				06D795481EA8505D008D48F1 /* FFCategoryStyle.swift in Sources */,
+				06DC00DD1EC5A20600FD579B /* FFKeyboardBar.swift in Sources */,
+				06D795441EA84FFA008D48F1 /* FFSegmentBar.swift in Sources */,
+				06DC00DF1EC5A21900FD579B /* FFKeyboardBarStyle.swift in Sources */,
+				06D795401EA84FC0008D48F1 /* FFSegmentContainer.swift in Sources */,
+				06450B551EACC6660040C573 /* FFKeyboardLayout.swift in Sources */,
+				06D795481EA8505D008D48F1 /* FFSegmentBarStyle.swift in Sources */,
 				06D795131EA84E84008D48F1 /* ViewController.swift in Sources */,
-				06CF82E71EAE58B60018438A /* FFCategoryKeyboardView.swift in Sources */,
+				06CF82E71EAE58B60018438A /* FFKeyboardContent.swift in Sources */,
 				06D795111EA84E84008D48F1 /* AppDelegate.swift in Sources */,
-				06D795461EA85038008D48F1 /* FFCategoryContentView.swift in Sources */,
+				06D795461EA85038008D48F1 /* FFSegmentContent.swift in Sources */,
+				06DC00DB1EC5A13C00FD579B /* FFKeyboardContainer.swift in Sources */,
 				06D795421EA84FE5008D48F1 /* UIColor+FFExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

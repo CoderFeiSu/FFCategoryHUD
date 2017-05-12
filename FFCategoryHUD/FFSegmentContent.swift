@@ -7,21 +7,20 @@
 //
 import UIKit
 
-protocol FFCategoryContentViewDelegate: class {
-    func categoryContentView(_ categoryContentView: FFCategoryContentView, sourceIndex: Int, targetIndex: Int, progress: CGFloat)
-    func categoryContentView(_ categoryContentView: FFCategoryContentView, didEndScrollAt index: Int)
+protocol FFSegmentContentDelegate: class {
+    func segmentContent(_ segmentContent: FFSegmentContent, sourceIndex: Int, targetIndex: Int, progress: CGFloat)
+    func segmentContent(_ segmentContent: FFSegmentContent, didEndScrollAt index: Int)
 }
 
-private let kContentCellID = "contentCell"
+private let kSegmentContentCellID = "segmentContentCell"
 
-class FFCategoryContentView: UIView {
+class FFSegmentContent: UIView {
     
-   weak var delegate: FFCategoryContentViewDelegate?
+   weak var delegate: FFSegmentContentDelegate?
     
    fileprivate var  childVCs: [UIViewController]
    fileprivate var  parentVC: UIViewController
    fileprivate var  beginOffsetX: CGFloat = 0
-   fileprivate var  style: FFCategoryStyle
    // 当点击Lbl的时候，不执行DidScroll，不然会出现progress大于1的情况，比如 2 3 4
    fileprivate var  isHandlerDidScroll: Bool = true
    fileprivate lazy var collectionView: UICollectionView = {
@@ -30,25 +29,22 @@ class FFCategoryContentView: UIView {
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0.0
         layout.minimumInteritemSpacing = 0.0
-        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collectionView.frame = self.bounds
-        collectionView.isPagingEnabled = true
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.bounces = false
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kContentCellID)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.backgroundColor = self.style.contentBackgroundColor
-        collectionView.alpha = self.style.contentAlpha
-        return collectionView
+        let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        cv.frame = self.bounds
+        cv.isPagingEnabled = true
+        cv.showsHorizontalScrollIndicator = false
+        cv.bounces = false
+        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kSegmentContentCellID)
+        cv.delegate = self
+        cv.dataSource = self
+        return cv
     }()
     
-    init(frame: CGRect, style: FFCategoryStyle, childVCs: [UIViewController], parentVC: UIViewController) {
+    init(frame: CGRect, childVCs: [UIViewController], parentVC: UIViewController) {
         
         // 记录属性
         self.childVCs = childVCs;
         self.parentVC = parentVC;
-        self.style = style
         super.init(frame: frame)
         
             // 添加子控制器到父控制器中
@@ -69,7 +65,7 @@ class FFCategoryContentView: UIView {
 
 
 
-extension FFCategoryContentView: UICollectionViewDataSource, UICollectionViewDelegate {
+extension FFSegmentContent: UICollectionViewDataSource, UICollectionViewDelegate {
 
     
   
@@ -81,10 +77,11 @@ extension FFCategoryContentView: UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kContentCellID, for: indexPath)
+       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kSegmentContentCellID, for: indexPath)
             for view in cell.contentView.subviews {
                 view.removeFromSuperview()
          }
+        
         cell.contentView.addSubview(childVCs[indexPath.item].view)
         
         return cell
@@ -103,7 +100,7 @@ extension FFCategoryContentView: UICollectionViewDataSource, UICollectionViewDel
     
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-      self.delegate?.categoryContentView(self, didEndScrollAt: Int(scrollView.contentOffset.x / scrollView.bounds.width))
+      self.delegate?.segmentContent(self, didEndScrollAt: Int(scrollView.contentOffset.x / scrollView.bounds.width))
 }
     
     
@@ -111,7 +108,6 @@ extension FFCategoryContentView: UICollectionViewDataSource, UICollectionViewDel
     
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         
         guard isHandlerDidScroll else {
             return
@@ -151,16 +147,16 @@ extension FFCategoryContentView: UICollectionViewDataSource, UICollectionViewDel
         guard progress <= 1 else {
             return
         }
-        self.delegate?.categoryContentView(self, sourceIndex: sourceIndex, targetIndex: targetIndex, progress: progress)
+        self.delegate?.segmentContent(self, sourceIndex: sourceIndex, targetIndex: targetIndex, progress: progress)
   }
 
 }
 
 
 
-extension FFCategoryContentView: FFCategoryTitleViewDelegate {
+extension FFSegmentContent: FFSegmentBarDelegate {
 
-    func categoryTitleView(_ categoryTitleView: FFCategoryTitleView, didClickedLblAt index: Int) {
+    func segmentBar(_ segmentBar: FFSegmentBar, didClickedLblAt index: Int) {
         // 不执行DidScroll
         isHandlerDidScroll = false
         // 滚动内容部分
