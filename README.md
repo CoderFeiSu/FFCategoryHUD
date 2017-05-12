@@ -7,25 +7,25 @@
 * 网易新闻顶部示例代码1:
 
 ```objc
-
-        let frame = CGRect(x: 0, y: 64, width: 375, height: view.bounds.height - 64)
-        let titles = ["哈哈df","哈哈哈sdfas","哈哈哈333","哈","134124哈哈哈","说就撒了开发商"]
-        var barStyle = FFSegmentBarStyle()
-        barStyle.isShowBottomLine = true
-        barStyle.isNeedScale = true
-        barStyle.bottomLineColor = UIColor.red
-        var childVCs = [UIViewController]()
-        for _ in 0..<titles.count {
-            let vc = UIViewController()
-            vc.view.backgroundColor = UIColor.random
-            childVCs.append(vc)
-        }
-        let segmentContainer = FFSegmentContainer.init(frame: frame, barTitles: titles, barStyle: barStyle, childVCs: childVCs, parentVC: self)
-        view.addSubview(segmentContainer)
+	
+    let frame = CGRect(x: 0, y: 64, width: 375, height: view.bounds.height - 64)
+    let titles = ["哈哈df","哈哈哈sdfas","哈哈哈333","哈","134124哈哈哈","说就撒了开发商"]
+    var barStyle = FFSegmentBarStyle()
+    barStyle.isShowBottomLine = true
+    barStyle.isNeedScale = true
+    barStyle.bottomLineColor = UIColor.red
+    var childVCs = [UIViewController]()
+    for _ in 0..<titles.count {
+        let vc = UIViewController()
+        vc.view.backgroundColor = UIColor.random
+        childVCs.append(vc)
+    }
+    let segmentContainer = FFSegmentContainer.init(frame: frame, barTitles: titles, barStyle: barStyle, childVCs: childVCs, parentVC: self)
+    view.addSubview(segmentContainer)
 
 ```
 
-## 网易新闻顶部效果图
+##### 网易新闻顶部效果图
 <img src="http://s15.sinaimg.cn/mw690/003uLCdEzy7b1mRO6aG6e&amp;690" width="279" height="491" id="image_operate_56541494594904791">
 
 
@@ -60,8 +60,6 @@ class ViewController: UIViewController {
     
 }
 
-
-
 extension ViewController: FFKeyboardContainerDataSource, FFKeyboardContainerDelegate {
 
     func numberOfSections(in keyboardContainer: FFKeyboardContainer) -> Int {
@@ -91,7 +89,7 @@ extension ViewController: FFKeyboardContainerDataSource, FFKeyboardContainerDele
 
 ```
 
-## 图片键盘效果图
+##### 图片键盘效果图
 <img src="http://s1.sinaimg.cn/mw690/003uLCdEzy7b1pI0iZOa0&amp;690">
 
 
