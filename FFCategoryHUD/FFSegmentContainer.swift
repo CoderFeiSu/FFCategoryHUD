@@ -19,10 +19,18 @@ public class FFSegmentContainer: UIView {
     fileprivate var parentVC: UIViewController
 
     
-    init(frame: CGRect, barTitles: [String],barStyle: FFSegmentBarStyle, childVCs: [UIViewController], parentVC: UIViewController) {
+     /**
+     barTitles: 工具条文字
+     barStyle:  工具条样式
+     childVCs:  所有视图所在的控制器
+     parentVC:  父视图所在的控制器
+     
+     */
+    
+    init(frame: CGRect, barTitles: [String], barStyle: FFSegmentBarStyle, childVCs: [UIViewController], parentVC: UIViewController) {
         
         assert(barTitles.count == childVCs.count, "文字标题数量必须和子控制器数量相等")
-
+        
         // 记录属性
         self.barTitles = barTitles
         self.barStyle = barStyle
@@ -30,7 +38,7 @@ public class FFSegmentContainer: UIView {
         self.parentVC = parentVC
         
         super.init(frame: frame)
-    
+        
         // 添加子控件
         addChildView()
     }
