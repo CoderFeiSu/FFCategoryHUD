@@ -3,6 +3,7 @@
 * 简单易用
 
 ## 怎样使用
+* CocoaPods使用 pod 'FFCategoryHUD'
 * 手动拖入FFCategoryHUD文件夹到项目中
 * 网易新闻顶部示例代码1:
 
