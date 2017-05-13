@@ -18,7 +18,7 @@ protocol FFKeyboardContainerDataSource : class {
     func keyboardContainer(_ keyboardContainer: FFKeyboardContainer, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
 }
 
-class FFKeyboardContainer: UIView {
+open class FFKeyboardContainer: UIView {
 
     weak var dataSource: FFKeyboardContainerDataSource?
     weak var delegate: FFKeyboardContainerDelegate?
@@ -38,7 +38,7 @@ class FFKeyboardContainer: UIView {
         addChildView()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class FFSegmentContainer: UIView {
+public class FFSegmentContainer: UIView {
     
 
     fileprivate var barStyle: FFSegmentBarStyle 
@@ -35,9 +35,11 @@ class FFSegmentContainer: UIView {
         addChildView()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
     
 }
 
