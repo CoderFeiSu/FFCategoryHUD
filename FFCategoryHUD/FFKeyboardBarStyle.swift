@@ -9,13 +9,13 @@
 
 import UIKit
 
-public struct FFKeyboardBarStyle {
+public class FFKeyboardBarStyle {
     
     /** 文字标题是否是在显示内容上面 */
     public var isTitleOnTop: Bool = true
     /** pageControl高度 */
     public var pageControlHeight: CGFloat = 20
-    public var pageControlAlignment: FFAlignment = .top
+    public var pageControlAlignment: FFKeyboardBarAlignment = .top
     /** 文字视图高度 */
     public var height: CGFloat = 44
     /** 普通文字颜色 */
@@ -40,7 +40,7 @@ public struct FFKeyboardBarStyle {
 }
 
 
-public enum FFAlignment {
+public enum FFKeyboardBarAlignment {
     case top
     case bottom
 }
