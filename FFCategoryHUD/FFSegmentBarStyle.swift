@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FFSegmentBarStyle {
+public class FFSegmentBarStyle: NSObject {
     /** 文字视图高度 */
     public var height: CGFloat = 44
     /** 普通文字颜色 */

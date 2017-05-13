@@ -9,7 +9,7 @@
 
 import UIKit
 
-public class FFKeyboardBarStyle {
+public class FFKeyboardBarStyle: NSObject  {
     
     /** 文字标题是否是在显示内容上面 */
     public var isTitleOnTop: Bool = true
