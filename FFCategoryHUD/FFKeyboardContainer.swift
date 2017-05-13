@@ -7,27 +7,32 @@
 
 import UIKit
 
-@objc protocol FFKeyboardContainerDelegate : class {
+@objc public protocol FFKeyboardContainerDelegate : class {
    @objc optional func keyboardContainer(_ keyboardContainer: FFKeyboardContainer,didSelectItemAt indexPath: IndexPath)
    @objc optional func keyboardContainer(_ keyboardContainer: FFKeyboardContainer, didDeselectItemAt indexPath: IndexPath)
 }
 
-protocol FFKeyboardContainerDataSource : class {
+public protocol FFKeyboardContainerDataSource : class {
     func numberOfSections(in keyboardContainer: FFKeyboardContainer) -> Int
     func keyboardContainer(_ keyboardContainer: FFKeyboardContainer, numberOfItemsInSection section: Int) -> Int
     func keyboardContainer(_ keyboardContainer: FFKeyboardContainer, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
 }
 
-open class FFKeyboardContainer: UIView {
+public class FFKeyboardContainer: UIView {
 
-    weak var dataSource: FFKeyboardContainerDataSource?
-    weak var delegate: FFKeyboardContainerDelegate?
+    weak public var dataSource: FFKeyboardContainerDataSource?
+    weak public var delegate: FFKeyboardContainerDelegate?
     fileprivate var content: FFKeyboardContent?
     fileprivate var layout: FFCategoryKeyboardLayout
     fileprivate var barStyle: FFKeyboardBarStyle
     fileprivate var barTitles: [String]
 
-    
+    /**
+     barTitles: 工具条文字
+     barStyle:  工具条样式
+     layout: 小格子样式
+     
+     */
     init(frame: CGRect, barTitles: [String], barStyle: FFKeyboardBarStyle, layout: FFCategoryKeyboardLayout) {
         
         self.barTitles = barTitles
@@ -47,18 +52,18 @@ open class FFKeyboardContainer: UIView {
 
 
 extension FFKeyboardContainer {
-     func register(_ cellClass: Swift.AnyClass?, forCellWithReuseIdentifier identifier: String) {
+    public func register(_ cellClass: Swift.AnyClass?, forCellWithReuseIdentifier identifier: String) {
         self.content?.register(cellClass, forCellWithReuseIdentifier: identifier)
     }
 
-     func reloadData() {
+    public func reloadData() {
        self.content?.reloadData()
     }
 
-    func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionViewCell {
+    public  func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionViewCell {
       return (self.content?.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath))!
     }
-     func cellForItem(at indexPath: IndexPath) -> UICollectionViewCell? {
+    public func cellForItem(at indexPath: IndexPath) -> UICollectionViewCell? {
         return self.content?.cellForItem(at: indexPath)
     }
 }
