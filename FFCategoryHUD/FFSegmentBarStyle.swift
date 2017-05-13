@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct FFSegmentBarStyle {
+public struct FFSegmentBarStyle {
     /** 文字视图高度 */
     var height: CGFloat = 44
     /** 普通文字颜色 */

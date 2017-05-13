@@ -33,7 +33,7 @@ public class FFKeyboardContainer: UIView {
      layout: 小格子样式
      
      */
-    init(frame: CGRect, barTitles: [String], barStyle: FFKeyboardBarStyle, layout: FFCategoryKeyboardLayout) {
+   public init(frame: CGRect, barTitles: [String], barStyle: FFKeyboardBarStyle, layout: FFCategoryKeyboardLayout) {
         
         self.barTitles = barTitles
         self.barStyle = barStyle

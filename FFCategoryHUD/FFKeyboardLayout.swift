@@ -8,13 +8,13 @@
 
 import UIKit
 
-class FFCategoryKeyboardLayout: UICollectionViewLayout {
+public class FFCategoryKeyboardLayout: UICollectionViewLayout {
 
-    var sectionInset: UIEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-    var rowMargin: CGFloat = 10
-    var colMargin: CGFloat = 10
-    var rows: Int = 3
-    var cols: Int = 7
+   public var sectionInset: UIEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+   public var rowMargin: CGFloat = 10
+   public var colMargin: CGFloat = 10
+   public var rows: Int = 3
+   public var cols: Int = 7
     fileprivate lazy var totalPages = 0
     fileprivate lazy var attributes: [UICollectionViewLayoutAttributes] = [UICollectionViewLayoutAttributes]()
     fileprivate lazy var attrsWH: (CGFloat, CGFloat) = {
@@ -28,7 +28,7 @@ class FFCategoryKeyboardLayout: UICollectionViewLayout {
 
 extension FFCategoryKeyboardLayout {
 
-    override func prepare() {
+    override public func prepare() {
         super.prepare()
         
         guard let collectionView = collectionView else {return}
@@ -58,7 +58,7 @@ extension FFCategoryKeyboardLayout {
 
 extension FFCategoryKeyboardLayout {
     
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override public func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         super.layoutAttributesForElements(in: rect)
         return attributes
     }
@@ -67,7 +67,7 @@ extension FFCategoryKeyboardLayout {
 
 extension FFCategoryKeyboardLayout {
 
-    override var collectionViewContentSize: CGSize {
+    override public var collectionViewContentSize: CGSize {
         return CGSize(width: CGFloat(totalPages) * (collectionView?.bounds.width ?? 1), height: 0)
     }
 }

@@ -27,7 +27,7 @@ public class FFSegmentContainer: UIView {
      
      */
     
-    init(frame: CGRect, barTitles: [String], barStyle: FFSegmentBarStyle, childVCs: [UIViewController], parentVC: UIViewController) {
+   public init(frame: CGRect, barTitles: [String], barStyle: FFSegmentBarStyle, childVCs: [UIViewController], parentVC: UIViewController) {
         
         assert(barTitles.count == childVCs.count, "文字标题数量必须和子控制器数量相等")
         
