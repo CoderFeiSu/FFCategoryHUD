@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         var childVCs = [UIViewController]()
         let layout = UICollectionViewFlowLayout()
         for _ in 0..<titles.count {
-            let vc = UICollectionViewController(collectionViewLayout: layout)
+            let vc = UITableViewController()
             vc.view.backgroundColor = UIColor.random
             childVCs.append(vc)
         }
