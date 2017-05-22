@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
  
+        // 不要增加内边距
         automaticallyAdjustsScrollViewInsets = false
         
         // 分类视图
@@ -23,8 +24,9 @@ class ViewController: UIViewController {
         barStyle.isNeedScale = true
         barStyle.bottomLineColor = UIColor.red
         var childVCs = [UIViewController]()
+        let layout = UICollectionViewFlowLayout()
         for _ in 0..<titles.count {
-            let vc = UIViewController()
+            let vc = UICollectionViewController(collectionViewLayout: layout)
             vc.view.backgroundColor = UIColor.random
             childVCs.append(vc)
         }

@@ -81,9 +81,10 @@ extension FFSegmentContent: UICollectionViewDataSource, UICollectionViewDelegate
             for view in cell.contentView.subviews {
                 view.removeFromSuperview()
          }
-        
-        cell.contentView.addSubview(childVCs[indexPath.item].view)
-        
+        let vc = childVCs[indexPath.item]
+        guard let view = vc.view else {return cell}
+        view.frame = cell.contentView.bounds
+        cell.contentView.addSubview(view)
         return cell
     }
     

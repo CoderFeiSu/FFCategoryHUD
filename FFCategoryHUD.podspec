@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "FFCategoryHUD"
-  s.version      = "0.0.9"
+  s.version      = "0.1.0"
   s.summary      = "超强大的分类视图框架"
 
   # This description is used to generate tags and improve search results.

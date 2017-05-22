@@ -102,7 +102,6 @@ extension FFSegmentBar {
             lbl.textColor = style.normalColor
             lbl.textAlignment = .center
             lbl.isUserInteractionEnabled = true
-//            lbl.backgroundColor = UIColor.random
             let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(lblClick))
             lbl.addGestureRecognizer(tapGesture)
             scrollView.addSubview(lbl)
