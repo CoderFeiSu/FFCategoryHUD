@@ -1,4 +1,4 @@
-## FFCategoryHUd
+## FFCategoryHUD
 * 里面有两个框架，一个类似于网易新闻顶部的滚动条，一个是图片键盘
 * 简单易用
 
