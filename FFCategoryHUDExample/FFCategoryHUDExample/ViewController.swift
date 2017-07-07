@@ -23,6 +23,7 @@ class ViewController: UIViewController {
         barStyle.isShowBottomLine = true
         barStyle.isNeedScale = true
         barStyle.bottomLineColor = UIColor.red
+        barStyle.contentColor = UIColor.red
         var childVCs = [UIViewController]()
         let layout = UICollectionViewFlowLayout()
         for _ in 0..<titles.count {

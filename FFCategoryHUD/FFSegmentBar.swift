@@ -228,7 +228,7 @@ extension FFSegmentBar: FFSegmentContentDelegate {
         let targetLbl = titleLbls[targetIndex]
         sourceLbl.textColor = UIColor.init(red: sourceRGB.0 - deltaRGB.0 * progress , green: sourceRGB.1 - deltaRGB.1 * progress, blue: sourceRGB.2 - deltaRGB.2 * progress, alpha: 1.0)
         targetLbl.textColor = UIColor.init(red: targetRGB.0 + deltaRGB.0 * progress , green: targetRGB.1 + deltaRGB.1 * progress, blue: targetRGB.2 + deltaRGB.2 * progress, alpha: 1.0)
-        print(sourceIndex, targetIndex, progress)
+//        print(sourceIndex, targetIndex, progress)
         
         // 文字缩放
         if style.isNeedScale {

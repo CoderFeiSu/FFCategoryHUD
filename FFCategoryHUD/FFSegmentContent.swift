@@ -21,6 +21,7 @@ class FFSegmentContent: UIView {
    fileprivate var  childVCs: [UIViewController]
    fileprivate var  parentVC: UIViewController
    fileprivate var  beginOffsetX: CGFloat = 0
+   fileprivate var  style: FFSegmentBarStyle
    // 当点击Lbl的时候，不执行DidScroll，不然会出现progress大于1的情况，比如 2 3 4
    fileprivate var  isHandlerDidScroll: Bool = true
    fileprivate lazy var collectionView: UICollectionView = {
@@ -37,14 +38,16 @@ class FFSegmentContent: UIView {
         cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kSegmentContentCellID)
         cv.delegate = self
         cv.dataSource = self
+        cv.backgroundColor = self.style.contentColor
         return cv
     }()
     
-    init(frame: CGRect, childVCs: [UIViewController], parentVC: UIViewController) {
+    init(frame: CGRect, childVCs: [UIViewController], parentVC: UIViewController, style: FFSegmentBarStyle) {
         
         // 记录属性
         self.childVCs = childVCs;
         self.parentVC = parentVC;
+        self.style = style
         super.init(frame: frame)
         
             // 添加子控制器到父控制器中

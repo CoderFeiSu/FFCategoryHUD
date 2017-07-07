@@ -64,7 +64,7 @@ extension FFSegmentContainer {
         addSubview(bar)
         // 添加内容
         let contentFrame = CGRect(x: 0, y: barStyle.height, width: bounds.width, height: bounds.height - barStyle.height)
-        let content = FFSegmentContent.init(frame:contentFrame, childVCs: childVCs, parentVC: parentVC)
+        let content = FFSegmentContent.init(frame:contentFrame, childVCs: childVCs, parentVC: parentVC, style: barStyle)
         bar.delegate = content
         content.delegate = bar
         addSubview(content)
