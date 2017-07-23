@@ -79,22 +79,20 @@ extension FFSegmentContent: UICollectionViewDataSource, UICollectionViewDelegate
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+
        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kSegmentContentCellID, for: indexPath)
-            for view in cell.contentView.subviews {
-                view.removeFromSuperview()
-         }
-        let vc = childVCs[indexPath.item]
+        for view in cell.contentView.subviews {view.removeFromSuperview()}
+        let childVC = childVCs[indexPath.item]
         var view = UIView()
-        if vc.isKind(of: UITableViewController.self) {
-            guard let tableController = vc as? UITableViewController else {return cell}
+        if childVC.isKind(of: UITableViewController.self) {
+            guard let tableController = childVC as? UITableViewController else {return cell}
             view = tableController.tableView
-        } else if vc.isKind(of: UICollectionViewController.self) {
-            guard let collectionController = vc as? UICollectionViewController else {return cell}
+        } else if childVC.isKind(of: UICollectionViewController.self) {
+            guard let collectionController = childVC as? UICollectionViewController else {return cell}
             guard let collectionView = collectionController.collectionView else {return cell}
             view = collectionView
         } else {
-            view = vc.view
+            view = childVC.view
         }
         view.frame = cell.contentView.bounds
         cell.contentView.addSubview(view)
@@ -131,8 +129,8 @@ extension FFSegmentContent: UICollectionViewDataSource, UICollectionViewDelegate
         // 判断有没有进行滑动
         guard  offsetX != beginOffsetX  else {
             return
-    }
-        
+       }
+
         let index = Int(offsetX / scrollView.bounds.width)
         let width = scrollView.bounds.width
         var sourceIndex: Int = 0
@@ -162,7 +160,7 @@ extension FFSegmentContent: UICollectionViewDataSource, UICollectionViewDelegate
             return
         }
         self.delegate?.segmentContent(self, sourceIndex: sourceIndex, targetIndex: targetIndex, progress: progress)
-  }
+    }
 
 }
 
@@ -176,7 +174,7 @@ extension FFSegmentContent: FFSegmentBarDelegate {
         // 滚动内容部分
         let indexPath = IndexPath(item: index, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-    }
+        collectionView.reloadItems(at: [indexPath])    }
 }
 
 

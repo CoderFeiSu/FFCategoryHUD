@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ContainerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,19 +18,13 @@ class ViewController: UIViewController {
         
         // 分类视图
         let frame = CGRect(x: 0, y: 64, width: 375, height: view.bounds.height - 64)
-        let titles = ["哈哈df","哈哈哈sdfas","哈哈哈333","哈","134124哈哈哈","说就撒了开发商"]
+        let titles = ["第一个控制器","第二个控制器"]
         let barStyle = FFSegmentBarStyle()
         barStyle.isShowBottomLine = true
         barStyle.isNeedScale = true
         barStyle.bottomLineColor = UIColor.red
         barStyle.contentColor = UIColor.red
-        var childVCs = [UIViewController]()
-        let layout = UICollectionViewFlowLayout()
-        for _ in 0..<titles.count {
-            let vc = UITableViewController()
-            vc.view.backgroundColor = UIColor.random
-            childVCs.append(vc)
-        }
+        let childVCs = [FirstViewController(), SecondViewController()]
         let segmentContainer = FFSegmentContainer.init(frame: frame, barTitles: titles, barStyle: barStyle, childVCs: childVCs, parentVC: self)
         view.addSubview(segmentContainer)
         
