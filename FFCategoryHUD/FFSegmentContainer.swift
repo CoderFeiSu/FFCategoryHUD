@@ -47,8 +47,6 @@ public class FFSegmentContainer: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
 }
 
 
