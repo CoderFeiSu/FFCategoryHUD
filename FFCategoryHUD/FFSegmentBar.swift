@@ -108,7 +108,7 @@ extension FFSegmentBar {
             titleLbls.append(lbl)
 
             // 计算X和W
-            lblW = (title as NSString).boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 0), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName:  lbl.font], context: nil).width
+            lblW = (title as NSString).boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 0), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font:  lbl.font], context: nil).width
             i == 0 ? (lblX =  style.leftMargin) : (lblX = titleLbls[i - 1].frame.maxX + style.margin)
             // 设置尺寸
             lbl.frame = CGRect(x: lblX, y: lblY, width: lblW, height: lblH)
