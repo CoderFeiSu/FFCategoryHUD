@@ -31,6 +31,7 @@ class FFKeyboardBar: UIView {
         let scrollView = UIScrollView()
         scrollView.frame = self.bounds
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.isScrollEnabled = false
         scrollView.backgroundColor = self.style.barColor
         return scrollView
     }()
