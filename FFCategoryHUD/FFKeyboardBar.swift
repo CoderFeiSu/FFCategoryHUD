@@ -2,8 +2,8 @@
 //  FFKeyboardBar.swift
 //  FFCategoryHUDExample
 //
-//  Created by 苏飞 on 2017/5/12.
-//  Copyright © 2017年 苏飞. All rights reserved.
+//  Created by Freedom on 2017/5/12.
+//  Copyright © 2017年 Freedom. All rights reserved.
 //
 
 import UIKit

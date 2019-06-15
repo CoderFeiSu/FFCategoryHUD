@@ -26,6 +26,8 @@
 		06DC00DB1EC5A13C00FD579B /* FFKeyboardContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DC00DA1EC5A13C00FD579B /* FFKeyboardContainer.swift */; };
 		06DC00DD1EC5A20600FD579B /* FFKeyboardBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DC00DC1EC5A20600FD579B /* FFKeyboardBar.swift */; };
 		06DC00DF1EC5A21900FD579B /* FFKeyboardBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DC00DE1EC5A21900FD579B /* FFKeyboardBarStyle.swift */; };
+		A5242F2F22B3EB8300185340 /* FFConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5242F2E22B3EB8300185340 /* FFConst.swift */; };
+		A5242F3122B3F87500185340 /* String+FFExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5242F3022B3F87500185340 /* String+FFExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		06DC00DA1EC5A13C00FD579B /* FFKeyboardContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFKeyboardContainer.swift; sourceTree = "<group>"; };
 		06DC00DC1EC5A20600FD579B /* FFKeyboardBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFKeyboardBar.swift; sourceTree = "<group>"; };
 		06DC00DE1EC5A21900FD579B /* FFKeyboardBarStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFKeyboardBarStyle.swift; sourceTree = "<group>"; };
+		A5242F2E22B3EB8300185340 /* FFConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFConst.swift; sourceTree = "<group>"; };
+		A5242F3022B3F87500185340 /* String+FFExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FFExtension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +169,8 @@
 				06CF82E61EAE58B60018438A /* FFKeyboardContent.swift */,
 				06450B541EACC6660040C573 /* FFKeyboardLayout.swift */,
 				06D795411EA84FE5008D48F1 /* UIColor+FFExtension.swift */,
+				A5242F3022B3F87500185340 /* String+FFExtension.swift */,
+				A5242F2E22B3EB8300185340 /* FFConst.swift */,
 			);
 			name = FFCategoryHUD;
 			path = ../../FFCategoryHUD;
@@ -260,6 +266,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -310,6 +317,7 @@
 				06DC00DD1EC5A20600FD579B /* FFKeyboardBar.swift in Sources */,
 				06D795441EA84FFA008D48F1 /* FFSegmentBar.swift in Sources */,
 				06DC00DF1EC5A21900FD579B /* FFKeyboardBarStyle.swift in Sources */,
+				A5242F2F22B3EB8300185340 /* FFConst.swift in Sources */,
 				06D795401EA84FC0008D48F1 /* FFSegmentContainer.swift in Sources */,
 				06C008971F20C032006FE57A /* SecondViewController.swift in Sources */,
 				06450B551EACC6660040C573 /* FFKeyboardLayout.swift in Sources */,
@@ -320,6 +328,7 @@
 				06D795111EA84E84008D48F1 /* AppDelegate.swift in Sources */,
 				06D795461EA85038008D48F1 /* FFSegmentContent.swift in Sources */,
 				06DC00DB1EC5A13C00FD579B /* FFKeyboardContainer.swift in Sources */,
+				A5242F3122B3F87500185340 /* String+FFExtension.swift in Sources */,
 				06D795421EA84FE5008D48F1 /* UIColor+FFExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

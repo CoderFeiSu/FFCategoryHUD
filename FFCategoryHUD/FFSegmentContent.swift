@@ -2,8 +2,8 @@
 //  FFCategoryContentView.swift
 //  FFCategoryHUDExample
 //
-//  Created by 苏飞 on 2017/4/20.
-//  Copyright © 2017年 苏飞. All rights reserved.
+//  Created by Freedom on 2017/4/20.
+//  Copyright © 2017年 Freedom. All rights reserved.
 //
 import UIKit
 
@@ -53,7 +53,7 @@ class FFSegmentContent: UIView {
             // 添加子控制器到父控制器中
             for childVC in self.childVCs {
                 parentVC.addChildViewController(childVC)
-        }
+            }
             // 添加子视图
             addSubview(collectionView)
     
@@ -168,13 +168,14 @@ extension FFSegmentContent: UICollectionViewDataSource, UICollectionViewDelegate
 
 extension FFSegmentContent: FFSegmentBarDelegate {
 
-    func segmentBar(_ segmentBar: FFSegmentBar, didClickedLblAt index: Int) {
+   func segmentBar(_ segmentBar: FFSegmentBar, didClickedLblAt index: Int) {
         // 不执行DidScroll
         isHandlerDidScroll = false
         // 滚动内容部分
         let indexPath = IndexPath(item: index, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-        collectionView.reloadItems(at: [indexPath])    }
+        collectionView.reloadItems(at: [indexPath])
+    }
 }
 
 

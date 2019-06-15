@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  FFCategoryHUDExample
 //
-//  Created by 苏飞 on 2017/4/20.
-//  Copyright © 2017年 苏飞. All rights reserved.
+//  Created by Freedom on 2017/4/20.
+//  Copyright © 2017年 Freedom. All rights reserved.
 //
 
 import UIKit
@@ -17,15 +17,15 @@ class ContainerViewController: UIViewController {
         automaticallyAdjustsScrollViewInsets = false
         
         // 分类视图
-        let frame = CGRect(x: 0, y: 64, width: 375, height: view.bounds.height - 64)
+        let frame = CGRect(x: 0, y: kNavigationBarH, width: 375, height: view.bounds.height - kNavigationBarH)
         let titles = ["第一个控制器","第二个控制器"]
         let barStyle = FFSegmentBarStyle()
         barStyle.isShowBottomLine = true
-        barStyle.isNeedScale = true
+//        barStyle.isNeedScale = true
         barStyle.bottomLineColor = UIColor.red
         barStyle.contentColor = UIColor.red
         let childVCs = [FirstViewController(), SecondViewController()]
-        let segmentContainer = FFSegmentContainer.init(frame: frame, barTitles: titles, barStyle: barStyle, childVCs: childVCs, parentVC: self)
+        let segmentContainer = FFSegmentContainer(frame: frame, barTitles: titles, barStyle: barStyle, childVCs: childVCs, parentVC: self)
         view.addSubview(segmentContainer)
         
         
