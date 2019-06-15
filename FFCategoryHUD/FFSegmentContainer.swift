@@ -8,37 +8,38 @@
 
 import UIKit
 
+
 public class FFSegmentContainer: UIView {
     
-
     fileprivate var barStyle: FFSegmentBarStyle 
-    fileprivate var barTitles: [String]
-    fileprivate var childVCs: [UIViewController]
+    fileprivate var items: [FFSegmentItem]
     fileprivate var parentVC: UIViewController
-
     
      /**
      barTitles: 工具条文字
      barStyle:  工具条样式
      childVCs:  所有视图所在的控制器
      parentVC:  父视图所在的控制器
-     
      */
+   public init(frame: CGRect, barStyle: FFSegmentBarStyle, items: [FFSegmentItem], parentVC: UIViewController) {
     
-   public init(frame: CGRect, barTitles: [String], barStyle: FFSegmentBarStyle, childVCs: [UIViewController], parentVC: UIViewController) {
-        
-        assert(barTitles.count == childVCs.count, "文字标题数量必须和子控制器数量相等")
-        
         // 记录属性
-        self.barTitles = barTitles
         self.barStyle = barStyle
-        self.childVCs = childVCs
+        self.items = items
         self.parentVC = parentVC
         
         super.init(frame: frame)
         
-        // 添加子控件
-        addChildView()
+        // 添加文字标题
+        let barFrame = CGRect(x: 0, y: 0, width: bounds.width, height: barStyle.height)
+        let bar = FFSegmentBar(frame: barFrame, items: items, style: barStyle)
+        addSubview(bar)
+        // 添加内容
+        let contentFrame = CGRect(x: 0, y: barStyle.height, width: bounds.width, height: bounds.height - barStyle.height)
+        let content = FFSegmentContent(frame:contentFrame, items: items, parentVC: parentVC, style: barStyle)
+        bar.delegate = content
+        content.delegate = bar
+        addSubview(content)
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -46,28 +47,4 @@ public class FFSegmentContainer: UIView {
     }
     
 }
-
-
-
-
-
-extension FFSegmentContainer {
-
-    fileprivate func addChildView() {
-        // 添加文字标题
-        let barFrame = CGRect(x: 0, y: 0, width: bounds.width, height: barStyle.height)
-        let bar = FFSegmentBar.init(frame: barFrame, titles: barTitles, style: barStyle)
-        addSubview(bar)
-        // 添加内容
-        let contentFrame = CGRect(x: 0, y: barStyle.height, width: bounds.width, height: bounds.height - barStyle.height)
-        let content = FFSegmentContent.init(frame:contentFrame, childVCs: childVCs, parentVC: parentVC, style: barStyle)
-        bar.delegate = content
-        content.delegate = bar
-        addSubview(content)
-    }
-}
-
-
-
-
 

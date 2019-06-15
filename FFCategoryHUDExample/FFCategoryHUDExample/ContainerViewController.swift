@@ -18,14 +18,16 @@ class ContainerViewController: UIViewController {
         
         // 分类视图
         let frame = CGRect(x: 0, y: kNavigationBarH, width: 375, height: view.bounds.height - kNavigationBarH)
-        let titles = ["第一个控制器","第二个控制器"]
         let barStyle = FFSegmentBarStyle()
-        barStyle.isShowBottomLine = true
+        barStyle.bottomLine.isShow = true
+        barStyle.bottomLine.isFitTitle = true
 //        barStyle.isNeedScale = true
-        barStyle.bottomLineColor = UIColor.red
+        barStyle.bottomLine.color = UIColor.red
         barStyle.contentColor = UIColor.red
-        let childVCs = [FirstViewController(), SecondViewController()]
-        let segmentContainer = FFSegmentContainer(frame: frame, barTitles: titles, barStyle: barStyle, childVCs: childVCs, parentVC: self)
+        let item1: FFSegmentItem = FFSegmentItem(title: "第一个控制器", vc: FirstViewController())
+        let item2: FFSegmentItem = FFSegmentItem(title: "第二个控制器", vc: SecondViewController(), isPushVC: true)
+        let item3: FFSegmentItem = FFSegmentItem(title: "第三个控制器", vc: ThirdViewController())
+        let segmentContainer = FFSegmentContainer(frame: frame, barStyle: barStyle, items: [item1, item2, item3], parentVC: self)
         view.addSubview(segmentContainer)
         
         

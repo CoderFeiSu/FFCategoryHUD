@@ -18,7 +18,7 @@ class FFSegmentContent: UIView {
     
    weak var delegate: FFSegmentContentDelegate?
     
-   fileprivate var  childVCs: [UIViewController]
+   fileprivate var  items: [FFSegmentItem]
    fileprivate var  parentVC: UIViewController
    fileprivate var  beginOffsetX: CGFloat = 0
    fileprivate var  style: FFSegmentBarStyle
@@ -42,20 +42,24 @@ class FFSegmentContent: UIView {
         return cv
     }()
     
-    init(frame: CGRect, childVCs: [UIViewController], parentVC: UIViewController, style: FFSegmentBarStyle) {
+    init(frame: CGRect, items: [FFSegmentItem], parentVC: UIViewController, style: FFSegmentBarStyle) {
         
         // 记录属性
-        self.childVCs = childVCs;
+        self.items = items;
         self.parentVC = parentVC;
         self.style = style
         super.init(frame: frame)
         
-            // 添加子控制器到父控制器中
-            for childVC in self.childVCs {
-                parentVC.addChildViewController(childVC)
-            }
-            // 添加子视图
-            addSubview(collectionView)
+        // 添加子控制器到父控制器中
+        var index: Int = 0
+        for item in self.items {
+            if item.isPushVC { continue }
+            item.index = index
+            parentVC.addChildViewController(item.vc)
+            index += 1
+        }
+        // 添加子视图
+        addSubview(collectionView)
     
 }
     required init?(coder aDecoder: NSCoder) {
@@ -70,11 +74,9 @@ class FFSegmentContent: UIView {
 
 extension FFSegmentContent: UICollectionViewDataSource, UICollectionViewDelegate {
 
-    
-  
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return childVCs.count
 
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return parentVC.childViewControllers.count
     }
     
     
@@ -82,7 +84,7 @@ extension FFSegmentContent: UICollectionViewDataSource, UICollectionViewDelegate
 
        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kSegmentContentCellID, for: indexPath)
         for view in cell.contentView.subviews {view.removeFromSuperview()}
-        let childVC = childVCs[indexPath.item]
+        let childVC = parentVC.childViewControllers[indexPath.item]
         var view = UIView()
         if childVC.isKind(of: UITableViewController.self) {
             guard let tableController = childVC as? UITableViewController else {return cell}
@@ -106,30 +108,27 @@ extension FFSegmentContent: UICollectionViewDataSource, UICollectionViewDelegate
    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if (!decelerate) {
-         scrollViewDidEndDecelerating(scrollView)
+            scrollViewDidEndDecelerating(scrollView)
         }
     }
     
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
       self.delegate?.segmentContent(self, didEndScrollAt: Int(scrollView.contentOffset.x / scrollView.bounds.width))
-}
-    
-    
-    
+    }
     
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         guard isHandlerDidScroll else {
             return
-     }
+        }
  
         let offsetX = scrollView.contentOffset.x
         // 判断有没有进行滑动
         guard  offsetX != beginOffsetX  else {
             return
-       }
+        }
 
         let index = Int(offsetX / scrollView.bounds.width)
         let width = scrollView.bounds.width
@@ -137,28 +136,25 @@ extension FFSegmentContent: UICollectionViewDataSource, UICollectionViewDelegate
         var targetIndex: Int = 0
         var progress: CGFloat = 0.0
         if (offsetX > beginOffsetX) { // 往左滑动
-         sourceIndex = index
-         targetIndex = index + 1
-         progress = (offsetX - beginOffsetX) / width
-   
-                if targetIndex >= childVCs.count {
-                    targetIndex = childVCs.count - 1
-                }
-            
-            
-            if (offsetX - beginOffsetX == width) {
-              targetIndex = sourceIndex
-              sourceIndex = targetIndex - 1
+             sourceIndex = index
+             targetIndex = index + 1
+             progress = (offsetX - beginOffsetX) / width
+       
+            if targetIndex >= items.count {
+                 targetIndex = items.count - 1
             }
-    } else { // 往右滑动
-         targetIndex = index
-         sourceIndex = index + 1
-         progress = (beginOffsetX - offsetX) / width
-    }
-        // 可以防止快速滚动出现两个选中
-        guard progress <= 1 else {
-            return
+            if (offsetX - beginOffsetX == width) {
+                  targetIndex = sourceIndex
+                  sourceIndex = targetIndex - 1
+            }
+            
+        } else { // 往右滑动
+             targetIndex = index
+             sourceIndex = index + 1
+             progress = (beginOffsetX - offsetX) / width
         }
+        // 可以防止快速滚动出现两个选中
+        guard progress <= 1 else { return }
         self.delegate?.segmentContent(self, sourceIndex: sourceIndex, targetIndex: targetIndex, progress: progress)
     }
 
@@ -168,14 +164,24 @@ extension FFSegmentContent: UICollectionViewDataSource, UICollectionViewDelegate
 
 extension FFSegmentContent: FFSegmentBarDelegate {
 
-   func segmentBar(_ segmentBar: FFSegmentBar, didClickedLblAt index: Int) {
+   func segmentBar(_ segmentBar: FFSegmentBar, sourceIndex: Int, targetIndex: Int) {
         // 不执行DidScroll
         isHandlerDidScroll = false
         // 滚动内容部分
-        let indexPath = IndexPath(item: index, section: 0)
+        let item = items[targetIndex]
+        if item.isPushVC {
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+                self.parentVC.navigationController?.pushViewController(item.vc, animated: true)
+               
+//            }
+                self.delegate?.segmentContent(self, didEndScrollAt: sourceIndex)            
+            return
+        }
+        let indexPath = IndexPath(item: item.index, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         collectionView.reloadItems(at: [indexPath])
     }
+    
 }
 
 

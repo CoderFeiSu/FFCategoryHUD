@@ -26,6 +26,8 @@
 		06DC00DB1EC5A13C00FD579B /* FFKeyboardContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DC00DA1EC5A13C00FD579B /* FFKeyboardContainer.swift */; };
 		06DC00DD1EC5A20600FD579B /* FFKeyboardBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DC00DC1EC5A20600FD579B /* FFKeyboardBar.swift */; };
 		06DC00DF1EC5A21900FD579B /* FFKeyboardBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DC00DE1EC5A21900FD579B /* FFKeyboardBarStyle.swift */; };
+		A51EF13322B4DDFF0035F561 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51EF13222B4DDFF0035F561 /* ThirdViewController.swift */; };
+		A51EF13522B52E560035F561 /* FFSegmentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51EF13422B52E560035F561 /* FFSegmentItem.swift */; };
 		A5242F2F22B3EB8300185340 /* FFConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5242F2E22B3EB8300185340 /* FFConst.swift */; };
 		A5242F3122B3F87500185340 /* String+FFExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5242F3022B3F87500185340 /* String+FFExtension.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +75,8 @@
 		06DC00DA1EC5A13C00FD579B /* FFKeyboardContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFKeyboardContainer.swift; sourceTree = "<group>"; };
 		06DC00DC1EC5A20600FD579B /* FFKeyboardBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFKeyboardBar.swift; sourceTree = "<group>"; };
 		06DC00DE1EC5A21900FD579B /* FFKeyboardBarStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFKeyboardBarStyle.swift; sourceTree = "<group>"; };
+		A51EF13222B4DDFF0035F561 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
+		A51EF13422B52E560035F561 /* FFSegmentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFSegmentItem.swift; sourceTree = "<group>"; };
 		A5242F2E22B3EB8300185340 /* FFConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFConst.swift; sourceTree = "<group>"; };
 		A5242F3022B3F87500185340 /* String+FFExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FFExtension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,6 +134,7 @@
 				06D795121EA84E84008D48F1 /* ContainerViewController.swift */,
 				06C008941F20C012006FE57A /* FirstViewController.swift */,
 				06C008961F20C032006FE57A /* SecondViewController.swift */,
+				A51EF13222B4DDFF0035F561 /* ThirdViewController.swift */,
 				06D795141EA84E84008D48F1 /* Main.storyboard */,
 				06D795171EA84E84008D48F1 /* Assets.xcassets */,
 				06D795191EA84E84008D48F1 /* LaunchScreen.storyboard */,
@@ -160,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				06D7953F1EA84FC0008D48F1 /* FFSegmentContainer.swift */,
+				A51EF13422B52E560035F561 /* FFSegmentItem.swift */,
 				06D795431EA84FFA008D48F1 /* FFSegmentBar.swift */,
 				06D795471EA8505D008D48F1 /* FFSegmentBarStyle.swift */,
 				06D795451EA85038008D48F1 /* FFSegmentContent.swift */,
@@ -314,6 +320,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A51EF13322B4DDFF0035F561 /* ThirdViewController.swift in Sources */,
 				06DC00DD1EC5A20600FD579B /* FFKeyboardBar.swift in Sources */,
 				06D795441EA84FFA008D48F1 /* FFSegmentBar.swift in Sources */,
 				06DC00DF1EC5A21900FD579B /* FFKeyboardBarStyle.swift in Sources */,
@@ -329,6 +336,7 @@
 				06D795461EA85038008D48F1 /* FFSegmentContent.swift in Sources */,
 				06DC00DB1EC5A13C00FD579B /* FFKeyboardContainer.swift in Sources */,
 				A5242F3122B3F87500185340 /* String+FFExtension.swift in Sources */,
+				A51EF13522B52E560035F561 /* FFSegmentItem.swift in Sources */,
 				06D795421EA84FE5008D48F1 /* UIColor+FFExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

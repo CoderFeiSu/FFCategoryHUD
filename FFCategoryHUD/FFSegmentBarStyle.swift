@@ -9,6 +9,7 @@
 import UIKit
 
 public class FFSegmentBarStyle: NSObject {
+
     /** 文字视图高度 */
     public var height: CGFloat = 44
     /** 普通文字颜色 */
@@ -26,10 +27,9 @@ public class FFSegmentBarStyle: NSObject {
     public  var leftMargin: CGFloat = 5
     /** 默认文字到屏幕右边的间距是5 */
     public  var rightMargin: CGFloat = 5
-    /** 是否显示底部指示条 */
-    public var isShowBottomLine: Bool = false
-    public  var bottomLineHeight: CGFloat = 2.0
-    public var bottomLineColor: UIColor = UIColor.blue
+    /** 底部线条 */
+    public var bottomLine: FFSegmentBarBottomLine =  FFSegmentBarBottomLine()
+
     /** 是否可以缩放 */
     public var isNeedScale: Bool = false
     /** 放大到的比例 */
@@ -37,3 +37,12 @@ public class FFSegmentBarStyle: NSObject {
 }
 
 
+
+public class FFSegmentBarBottomLine: NSObject {
+    /** 是否显示底部指示条 */
+    public var isShow: Bool = false
+    public var height: CGFloat = 2.0
+    public var color: UIColor = UIColor.blue
+    /** 是否跟文字长度一样,默认占满整个文字视图 */
+    public var isFitTitle: Bool = false
+}

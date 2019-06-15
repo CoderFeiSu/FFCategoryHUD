@@ -8,11 +8,6 @@
 
 import UIKit
 
-var width: CGFloat {
-    
-    return 0.0
-}
-
 extension String {
     
     func size(font: UIFont , maxSize : CGSize) -> CGSize {
