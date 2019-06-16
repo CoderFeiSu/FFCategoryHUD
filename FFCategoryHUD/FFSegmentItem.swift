@@ -19,7 +19,6 @@ public class FFSegmentItem: NSObject {
         self.title = title
         self.isPushVC = isPushVC
         self.vc = vc
-        
     }
     
     required public init?(coder aDecoder: NSCoder) {
