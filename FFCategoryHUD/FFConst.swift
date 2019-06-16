@@ -3,7 +3,7 @@
 //  FFCategoryHUDExample
 //
 //  Created by 飞飞 on 2019/6/14.
-//  Copyright © 2019 苏飞. All rights reserved.
+//  Copyright © 2019 Freedom. All rights reserved.
 //
 
 import UIKit

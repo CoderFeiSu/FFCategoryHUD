@@ -3,8 +3,8 @@
 //  FFCategoryTitleView.swift
 //  FFCategoryHUDExample
 //
-//  Created by 苏飞 on 2017/4/20.
-//  Copyright © 2017年 苏飞. All rights reserved.
+//  Created by Freedom on 2017/4/20.
+//  Copyright © 2017年 Freedom. All rights reserved.
 //
 
 import UIKit
@@ -15,29 +15,30 @@ protocol FFSegmentBarDelegate: class {
 
 class FFSegmentBar: UIView {
     
-    weak var delegate: FFSegmentBarDelegate?
+//    weak var delegate: FFSegmentBarDelegate?
+    var delegates: [AnyObject] = [AnyObject]() {
+        didSet {
+            weakObjs = FFSegmentWeakArray(delegates)
+        }
+    }
     
+    fileprivate var weakObjs: FFSegmentWeakArray<AnyObject> = FFSegmentWeakArray([])
     fileprivate var style: FFSegmentBarStyle
     fileprivate var items: [FFSegmentItem]
     fileprivate var titleLbls: [UILabel] = [UILabel]()
     /** 选中的Lbl */
     fileprivate var selectedLbl: UILabel?
     fileprivate var sourceIndex: Int = -1
-    fileprivate lazy var isPush: Bool = false
    /** 是否可以滚动 */
     fileprivate lazy var isScrollEnable: Bool = false
     // 颜色渐变
-    fileprivate lazy var sourceRGB: (CGFloat, CGFloat, CGFloat) = {
-      return self.style.selectColor.rgbValue
-    }()
-    fileprivate lazy var targetRGB: (CGFloat, CGFloat, CGFloat) = {
-      return self.style.normalColor.rgbValue
-    }()
+    fileprivate lazy var sourceRGB: (CGFloat, CGFloat, CGFloat) =  self.style.selectColor.rgbValue
+    fileprivate lazy var targetRGB: (CGFloat, CGFloat, CGFloat) =  self.style.normalColor.rgbValue
     fileprivate lazy var deltaRGB: (CGFloat, CGFloat, CGFloat) = {
         let deltaR = self.sourceRGB.0 - self.targetRGB.0
         let deltaG = self.sourceRGB.1 - self.targetRGB.1
         let deltaB = self.sourceRGB.2 - self.targetRGB.2
-      return  (deltaR, deltaG, deltaB)
+        return  (deltaR, deltaG, deltaB)
     }()
     fileprivate lazy var scrollView: UIScrollView = {
        let scrollView = UIScrollView()
@@ -61,7 +62,14 @@ class FFSegmentBar: UIView {
         self.items = items
         super.init(frame: frame)
         
-        setUpUI()
+        addSubview(scrollView)
+        
+        addAllLbls()
+        
+        if style.bottomLine.isShow {
+            scrollView.addSubview(bottomLine)
+            handlerBottomLineLocation(lbl: self.titleLbls.first!)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -71,21 +79,8 @@ class FFSegmentBar: UIView {
 
 
 extension FFSegmentBar {
-
-    fileprivate func setUpUI() {
     
-        addSubview(scrollView)
-        
-        addLbl()
-        
-        if style.bottomLine.isShow {
-              scrollView.addSubview(bottomLine)
-              handlerBottomLineLocation(lbl: self.titleLbls.first!)
-        }
-    }
-    
-    
-    private func addLbl() {
+    private func addAllLbls() {
         let lblH = self.style.height
         let lblY: CGFloat = 0
         var lblX: CGFloat = 0
@@ -158,7 +153,10 @@ extension FFSegmentBar {
         handlerBottomLineLocation(lbl: lbl)
     
         // 通知滚动内容视图
-        self.delegate?.segmentBar(self, sourceIndex: sourceIndex, targetIndex: lbl.tag)
+        for obj in self.weakObjs {
+            guard let delegate: FFSegmentBarDelegate = obj as? FFSegmentBarDelegate else {return}
+            delegate.segmentBar(self, sourceIndex: sourceIndex, targetIndex: lbl.tag)
+        }
     
         let item = items[lbl.tag]
         if !item.isPushVC {
@@ -196,7 +194,6 @@ extension FFSegmentBar {
             }
             self.selectedLbl = lbl
         }
-
     }
     
     fileprivate func handlerBottomLineLocation(lbl: UILabel) {

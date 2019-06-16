@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContainerViewController: UIViewController {
+class ContainerViewController: UIViewController,FFSegmentContainerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +28,7 @@ class ContainerViewController: UIViewController {
         let item2: FFSegmentItem = FFSegmentItem(title: "第二个控制器", vc: SecondViewController(), isPushVC: true)
         let item3: FFSegmentItem = FFSegmentItem(title: "第三个控制器", vc: ThirdViewController())
         let segmentContainer = FFSegmentContainer(frame: frame, barStyle: barStyle, items: [item1, item2, item3], parentVC: self)
+        segmentContainer.delegate = self
         view.addSubview(segmentContainer)
         
         
@@ -47,7 +48,14 @@ class ContainerViewController: UIViewController {
         
     }
     
+    func segmentContainer(_ segmentContainer: FFSegmentContainer, didClickedlAt index: Int) {
+         print(self,#function,index)
+    }
     
+    
+    deinit {
+        print("我欧洲了")
+    }
 
 
 }

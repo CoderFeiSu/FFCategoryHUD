@@ -3,7 +3,7 @@
 //  FFCategoryHUDExample
 //
 //  Created by 飞飞 on 2019/6/15.
-//  Copyright © 2019 苏飞. All rights reserved.
+//  Copyright © 2019 Freedom. All rights reserved.
 //
 
 import UIKit
@@ -19,6 +19,7 @@ public class FFSegmentItem: NSObject {
         self.title = title
         self.isPushVC = isPushVC
         self.vc = vc
+        
     }
     
     required public init?(coder aDecoder: NSCoder) {

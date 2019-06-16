@@ -28,6 +28,7 @@
 		06DC00DF1EC5A21900FD579B /* FFKeyboardBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DC00DE1EC5A21900FD579B /* FFKeyboardBarStyle.swift */; };
 		A51EF13322B4DDFF0035F561 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51EF13222B4DDFF0035F561 /* ThirdViewController.swift */; };
 		A51EF13522B52E560035F561 /* FFSegmentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51EF13422B52E560035F561 /* FFSegmentItem.swift */; };
+		A520A09522B640BB00433572 /* FFSegmentWeakArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = A520A09422B640BB00433572 /* FFSegmentWeakArray.swift */; };
 		A5242F2F22B3EB8300185340 /* FFConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5242F2E22B3EB8300185340 /* FFConst.swift */; };
 		A5242F3122B3F87500185340 /* String+FFExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5242F3022B3F87500185340 /* String+FFExtension.swift */; };
 /* End PBXBuildFile section */
@@ -77,6 +78,7 @@
 		06DC00DE1EC5A21900FD579B /* FFKeyboardBarStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFKeyboardBarStyle.swift; sourceTree = "<group>"; };
 		A51EF13222B4DDFF0035F561 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		A51EF13422B52E560035F561 /* FFSegmentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFSegmentItem.swift; sourceTree = "<group>"; };
+		A520A09422B640BB00433572 /* FFSegmentWeakArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFSegmentWeakArray.swift; sourceTree = "<group>"; };
 		A5242F2E22B3EB8300185340 /* FFConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFConst.swift; sourceTree = "<group>"; };
 		A5242F3022B3F87500185340 /* String+FFExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FFExtension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -166,6 +168,7 @@
 			children = (
 				06D7953F1EA84FC0008D48F1 /* FFSegmentContainer.swift */,
 				A51EF13422B52E560035F561 /* FFSegmentItem.swift */,
+				A520A09422B640BB00433572 /* FFSegmentWeakArray.swift */,
 				06D795431EA84FFA008D48F1 /* FFSegmentBar.swift */,
 				06D795471EA8505D008D48F1 /* FFSegmentBarStyle.swift */,
 				06D795451EA85038008D48F1 /* FFSegmentContent.swift */,
@@ -322,6 +325,7 @@
 			files = (
 				A51EF13322B4DDFF0035F561 /* ThirdViewController.swift in Sources */,
 				06DC00DD1EC5A20600FD579B /* FFKeyboardBar.swift in Sources */,
+				A520A09522B640BB00433572 /* FFSegmentWeakArray.swift in Sources */,
 				06D795441EA84FFA008D48F1 /* FFSegmentBar.swift in Sources */,
 				06DC00DF1EC5A21900FD579B /* FFKeyboardBarStyle.swift in Sources */,
 				A5242F2F22B3EB8300185340 /* FFConst.swift in Sources */,
@@ -508,7 +512,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sufei.www.FFCategoryHUDExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -523,7 +527,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sufei.www.FFCategoryHUDExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

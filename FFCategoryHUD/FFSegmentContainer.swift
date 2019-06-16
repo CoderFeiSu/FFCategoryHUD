@@ -8,38 +8,39 @@
 
 import UIKit
 
+public protocol FFSegmentContainerDelegate: class {
+     func segmentContainer(_ segmentContainer: FFSegmentContainer, didClickedlAt index: Int)
+}
 
-public class FFSegmentContainer: UIView {
+public class FFSegmentContainer: UIView,FFSegmentBarDelegate {
     
-    fileprivate var barStyle: FFSegmentBarStyle 
-    fileprivate var items: [FFSegmentItem]
-    fileprivate var parentVC: UIViewController
+  public weak var delegate: FFSegmentContainerDelegate?
     
      /**
-     barTitles: 工具条文字
      barStyle:  工具条样式
-     childVCs:  所有视图所在的控制器
+     items:     item组成的数组
      parentVC:  父视图所在的控制器
      */
    public init(frame: CGRect, barStyle: FFSegmentBarStyle, items: [FFSegmentItem], parentVC: UIViewController) {
-    
-        // 记录属性
-        self.barStyle = barStyle
-        self.items = items
-        self.parentVC = parentVC
-        
         super.init(frame: frame)
-        
-        // 添加文字标题
+    
+        // 添加工具条
         let barFrame = CGRect(x: 0, y: 0, width: bounds.width, height: barStyle.height)
         let bar = FFSegmentBar(frame: barFrame, items: items, style: barStyle)
         addSubview(bar)
+    
         // 添加内容
         let contentFrame = CGRect(x: 0, y: barStyle.height, width: bounds.width, height: bounds.height - barStyle.height)
         let content = FFSegmentContent(frame:contentFrame, items: items, parentVC: parentVC, style: barStyle)
-        bar.delegate = content
-        content.delegate = bar
         addSubview(content)
+    
+        // 充当代理
+        bar.delegates = [content, self]
+        content.delegate = bar
+    }
+    
+    func segmentBar(_ segmentBar: FFSegmentBar, sourceIndex: Int, targetIndex: Int) {
+        self.delegate?.segmentContainer(self, didClickedlAt: targetIndex)
     }
     
     required public init?(coder aDecoder: NSCoder) {

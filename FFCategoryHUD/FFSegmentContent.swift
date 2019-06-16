@@ -55,7 +55,7 @@ class FFSegmentContent: UIView {
         for item in self.items {
             if item.isPushVC { continue }
             item.index = index
-            parentVC.addChildViewController(item.vc)
+            parentVC.addChild(item.vc)
             index += 1
         }
         // 添加子视图
@@ -76,7 +76,7 @@ extension FFSegmentContent: UICollectionViewDataSource, UICollectionViewDelegate
 
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return parentVC.childViewControllers.count
+        return parentVC.children.count
     }
     
     
@@ -84,7 +84,7 @@ extension FFSegmentContent: UICollectionViewDataSource, UICollectionViewDelegate
 
        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kSegmentContentCellID, for: indexPath)
         for view in cell.contentView.subviews {view.removeFromSuperview()}
-        let childVC = parentVC.childViewControllers[indexPath.item]
+        let childVC = parentVC.children[indexPath.item]
         var view = UIView()
         if childVC.isKind(of: UITableViewController.self) {
             guard let tableController = childVC as? UITableViewController else {return cell}
@@ -114,7 +114,7 @@ extension FFSegmentContent: UICollectionViewDataSource, UICollectionViewDelegate
     
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-      self.delegate?.segmentContent(self, didEndScrollAt: Int(scrollView.contentOffset.x / scrollView.bounds.width))
+       self.delegate?.segmentContent(self, didEndScrollAt: Int(scrollView.contentOffset.x / scrollView.bounds.width))
     }
     
     
@@ -141,11 +141,11 @@ extension FFSegmentContent: UICollectionViewDataSource, UICollectionViewDelegate
              progress = (offsetX - beginOffsetX) / width
        
             if targetIndex >= items.count {
-                 targetIndex = items.count - 1
+                targetIndex = items.count - 1
             }
             if (offsetX - beginOffsetX == width) {
-                  targetIndex = sourceIndex
-                  sourceIndex = targetIndex - 1
+                targetIndex = sourceIndex
+                sourceIndex = targetIndex - 1
             }
             
         } else { // 往右滑动
@@ -170,11 +170,12 @@ extension FFSegmentContent: FFSegmentBarDelegate {
         // 滚动内容部分
         let item = items[targetIndex]
         if item.isPushVC {
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
                 self.parentVC.navigationController?.pushViewController(item.vc, animated: true)
-               
-//            }
-                self.delegate?.segmentContent(self, didEndScrollAt: sourceIndex)            
+            }
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                self.delegate?.segmentContent(self, didEndScrollAt: sourceIndex)
+             }
             return
         }
         let indexPath = IndexPath(item: item.index, section: 0)
