@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "FFCategoryHUD"
-  s.version      = "0.3.1"
+  s.version      = "0.3.0"
   s.summary      = "超强大的分类视图框架"
   s.swift_versions = "5.0"
 
